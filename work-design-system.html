@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Work+Sans:wght@400;500;600;700&family=Oswald:wght@500;600;700&family=Cormorant+Garamond:wght@500;600;700&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -418,10 +419,11 @@
       --stage-muted: #6b6b66;
       --stage-border: #cfcfca;
       --stage-field: #ffffff;
+      --stage-font: 'Inter', sans-serif;
       background: var(--stage-bg);
       color: var(--stage-fg);
       border: 1px solid var(--border);
-      padding: 2rem;
+      padding: 2.25rem 2rem;
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
@@ -443,20 +445,20 @@
       text-align: center;
     }
     .stage-brand-name {
-      font-family: var(--font-mono);
-      font-size: 0.95rem;
+      font-family: var(--stage-font);
+      font-size: 1.05rem;
       font-weight: 700;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
       color: var(--stage-fg);
       text-align: center;
       margin-top: -0.75rem;
     }
     .comp-btn {
-      padding: 0.85rem 1.75rem;
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      font-weight: 700;
+      padding: 0.9rem 1.75rem;
+      font-family: var(--stage-font);
+      font-size: 0.95rem;
+      font-weight: 600;
       border: none;
       cursor: default;
       width: 100%;
@@ -464,10 +466,10 @@
     }
     .comp-label-badge {
       align-self: center;
-      font-family: var(--font-mono);
-      font-size: 0.62rem;
-      font-weight: 700;
-      padding: 0.25rem 0.55rem;
+      font-family: var(--stage-font);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.2rem 0.6rem;
       background: var(--stage-fg);
       color: var(--stage-bg);
       width: fit-content;
@@ -500,24 +502,24 @@
     }
     .comp-switch-track.on .comp-switch-knob { transform: translateX(22px); }
     .comp-switch-text {
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
+      font-family: var(--stage-font);
+      font-size: 0.95rem;
       color: var(--stage-fg);
     }
     .comp-field { display: flex; flex-direction: column; gap: 0.4rem; }
     .comp-field-label {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
+      font-family: var(--stage-font);
+      font-size: 0.85rem;
       color: var(--stage-muted);
       display: flex;
       align-items: center;
       gap: 0.4rem;
     }
     .comp-field-info {
-      width: 13px; height: 13px;
+      width: 14px; height: 14px;
       border: 1px solid currentColor;
       border-radius: 50%;
-      font-size: 0.5rem;
+      font-size: 0.55rem;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -529,14 +531,14 @@
       padding: 0.7rem 0.9rem;
       border: 1px solid var(--stage-border);
       background: var(--stage-field);
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
+      font-family: var(--stage-font);
+      font-size: 0.9rem;
       color: var(--stage-fg);
       transition: border-color 0.3s;
     }
     .comp-field-helper {
-      font-family: var(--font-mono);
-      font-size: 0.62rem;
+      font-family: var(--stage-font);
+      font-size: 0.78rem;
       color: var(--stage-muted);
     }
 
@@ -1114,14 +1116,14 @@
     <span class="footer-copy">Senior UX / UI Product Designer</span>
   </footer>
 
-      <script>
+     <script>
     const brands = {
-      bmw:        { name:'BMW',         primary:'#1C69D4', onPrimary:'#ffffff', radius:'4px',   transform:'none',      spacing:'0.02em', theme:'light', prim:'blue/500',   shape:'shape/sm',   type:'type/sentence' },
-      mini:       { name:'MINI',        primary:'#017EA4', onPrimary:'#ffffff', radius:'999px', transform:'none',      spacing:'0.02em', theme:'light', prim:'teal/600',   shape:'shape/pill', type:'type/sentence' },
-      motorrad:   { name:'Motorrad',    primary:'#0D0D0D', onPrimary:'#ffffff', radius:'0',     transform:'uppercase', spacing:'0.05em', theme:'light', prim:'black/900',  shape:'shape/none', type:'type/upper' },
-      rollsroyce: { name:'Rolls-Royce', primary:'#6D30A7', onPrimary:'#ffffff', radius:'999px', transform:'uppercase', spacing:'0.18em', theme:'light', prim:'purple/600', shape:'shape/pill', type:'type/upper-wide' },
-      alpina:     { name:'Alpina',      primary:'#9FE6CC', onPrimary:'#0A1A14', radius:'999px', transform:'none',      spacing:'0.02em', theme:'dark',  prim:'mint/300',   shape:'shape/pill', type:'type/sentence' },
-      alphabet:   { name:'Alphabet',    primary:'#484EA0', onPrimary:'#ffffff', radius:'999px', transform:'none',      spacing:'0.02em', theme:'light', prim:'indigo/500', shape:'shape/pill', type:'type/sentence' },
+      bmw:        { name:'BMW',         primary:'#1C69D4', onPrimary:'#ffffff', font:"'Inter', sans-serif",             radius:'4px',   transform:'none',      spacing:'0.02em', theme:'light', prim:'blue/500',   shape:'shape/sm',   type:'type/sentence' },
+      mini:       { name:'MINI',        primary:'#017EA4', onPrimary:'#ffffff', font:"'Work Sans', sans-serif",         radius:'999px', transform:'none',      spacing:'0.02em', theme:'light', prim:'teal/600',   shape:'shape/pill', type:'type/sentence' },
+      motorrad:   { name:'Motorrad',    primary:'#0D0D0D', onPrimary:'#ffffff', font:"'Oswald', sans-serif",            radius:'0',     transform:'uppercase', spacing:'0.05em', theme:'light', prim:'black/900',  shape:'shape/none', type:'type/upper' },
+      rollsroyce: { name:'Rolls-Royce', primary:'#6D30A7', onPrimary:'#ffffff', font:"'Cormorant Garamond', serif",     radius:'999px', transform:'uppercase', spacing:'0.18em', theme:'light', prim:'purple/600', shape:'shape/pill', type:'type/upper-wide' },
+      alpina:     { name:'Alpina',      primary:'#9FE6CC', onPrimary:'#0A1A14', font:"'Archivo', sans-serif",           radius:'999px', transform:'none',      spacing:'0.02em', theme:'dark',  prim:'mint/300',   shape:'shape/pill', type:'type/sentence' },
+      alphabet:   { name:'Alphabet',    primary:'#484EA0', onPrimary:'#ffffff', font:"'Inter', sans-serif",             radius:'999px', transform:'none',      spacing:'0.02em', theme:'light', prim:'indigo/500', shape:'shape/pill', type:'type/sentence' },
     };
 
     function swapBrand(key) {
@@ -1131,12 +1133,13 @@
         const isActive = btn.dataset.brand === key;
         btn.classList.toggle('active', isActive);
         btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
-        btn.style.background = isActive ? (b.theme === 'dark' ? b.primary : b.primary) : '';
+        btn.style.background = isActive ? b.primary : '';
         btn.style.color = isActive ? b.onPrimary : '';
       });
 
       const stage = document.getElementById('comp-stage');
       stage.classList.toggle('dark', b.theme === 'dark');
+      stage.style.setProperty('--stage-font', b.font);
       document.getElementById('stage-theme').textContent = b.theme === 'dark' ? 'Dark' : 'Light';
       document.getElementById('stage-brand').textContent = b.name;
 
@@ -1167,14 +1170,14 @@
           <span class="resolve-value"><span class="resolve-swatch" style="background:${b.primary}"></span> ${b.prim}</span>
         </div>
         <div class="resolve-row">
-          <span class="resolve-token-name">${b.prim}</span>
-          <span class="resolve-arrow"></span>
-          <span class="resolve-value"><span class="resolve-swatch" style="background:${b.primary}"></span> ${b.primary}</span>
-        </div>
-        <div class="resolve-row">
           <span class="resolve-token-name">button/radius</span>
           <span class="resolve-arrow"></span>
           <span class="resolve-value">${b.shape}</span>
+        </div>
+        <div class="resolve-row">
+          <span class="resolve-token-name">button/font</span>
+          <span class="resolve-arrow"></span>
+          <span class="resolve-value">${b.font.split(',')[0].replace(/'/g, '')}</span>
         </div>
         <div class="resolve-row">
           <span class="resolve-token-name">button/case</span>
