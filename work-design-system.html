@@ -861,7 +861,19 @@
         <p>Switch between brand modes below. Every component — button, badge, progress indicator, nav item — updates simultaneously. No component logic changes. Only the active Semantic mode swaps, resolving to different Primitive values underneath.</p>
       </div>
 
-       <div class="brand-demo-body">
+      <div class="brand-demo-wrap">
+        <div class="brand-demo-header">
+          <span class="brand-demo-title">Live Component Preview</span>
+          <div class="brand-switcher" role="group" aria-label="Select brand mode">
+            <button class="brand-btn" data-brand="bmw" aria-pressed="true" onclick="swapBrand('bmw')">BMW</button>
+            <button class="brand-btn" data-brand="mini" aria-pressed="false" onclick="swapBrand('mini')">MINI</button>
+            <button class="brand-btn" data-brand="motorrad" aria-pressed="false" onclick="swapBrand('motorrad')">Motorrad</button>
+            <button class="brand-btn" data-brand="rollsroyce" aria-pressed="false" onclick="swapBrand('rollsroyce')">Rolls-Royce</button>
+            <button class="brand-btn" data-brand="alpina" aria-pressed="false" onclick="swapBrand('alpina')">Alpina</button>
+            <button class="brand-btn" data-brand="alphabet" aria-pressed="false" onclick="swapBrand('alphabet')">Alphabet</button>
+          </div>
+        </div>
+        <div class="brand-demo-body">
           <div class="comp-preview">
             <div class="comp-preview-label">Components</div>
             <button class="comp-btn" id="demo-btn">Primary Action</button>
@@ -878,24 +890,21 @@
               <div class="comp-nav-item">Settings</div>
             </div>
           </div>
-
-          <div class="comp-preview token-resolve" id="token-resolve-panel">
-            <!-- Populated by swapBrand() -->
-          </div>
+          <div class="comp-preview token-resolve" id="token-resolve-panel"></div>
         </div>
       </div>
     </section>
 
-    <!-- VARIABLE ARCHITECTURE SCHEMATIC -->
+        <!-- VARIABLE ARCHITECTURE SCHEMATIC -->
     <section class="cs-section reveal">
       <div class="cs-label">Variable Structure</div>
       <h2 class="cs-section-title">How Variables<br><em>Connect Across Brands</em></h2>
       <div class="cs-prose">
-        <p>The diagram below shows the full token chain for a primary action token across three brand modes. Swapping the active mode in the Semantic layer is the only action required — everything else propagates automatically.</p>
+        <p>The diagram below shows the full token chain for a primary action token across brand modes. Swapping the active mode in the Semantic layer is the only action required — everything else propagates automatically.</p>
       </div>
 
       <div class="var-diagram">
-         <div class="var-diagram-header">
+        <div class="var-diagram-header">
           <div class="var-layer-head">
             <div class="var-layer-head-label">Layer 01</div>
             <div class="var-layer-head-title">Primitive</div>
@@ -909,108 +918,33 @@
             <div class="var-layer-head-title">Component</div>
           </div>
         </div>
-        </div>
-                <div class="var-diagram-body">
+        <div class="var-diagram-body">
           <!-- PRIMITIVE -->
           <div class="var-col">
-            <div class="token-pill">
-              <span class="token-swatch" style="background:#1C69D4;"></span>
-              <span class="token-name">blue/500</span>
-              <span class="token-val">#1C69D4</span>
-            </div>
-            <div class="token-pill">
-              <span class="token-swatch" style="background:#017EA4;"></span>
-              <span class="token-name">teal/600</span>
-              <span class="token-val">#017EA4</span>
-            </div>
-            <div class="token-pill">
-              <span class="token-swatch" style="background:#0062FF;"></span>
-              <span class="token-name">blue/400</span>
-              <span class="token-val">#0062FF</span>
-            </div>
-            <div class="token-pill">
-              <span class="token-swatch" style="background:#6D30A7;"></span>
-              <span class="token-name">purple/600</span>
-              <span class="token-val">#6D30A7</span>
-            </div>
-            <div class="token-pill">
-              <span class="token-swatch" style="background:#177375;"></span>
-              <span class="token-name">teal/700</span>
-              <span class="token-val">#177375</span>
-            </div>
-            <div class="token-pill">
-              <span class="token-swatch" style="background:#484EA0;"></span>
-              <span class="token-name">indigo/500</span>
-              <span class="token-val">#484EA0</span>
-            </div>
+            <div class="token-pill"><span class="token-swatch" style="background:#1C69D4;"></span><span class="token-name">blue/500</span><span class="token-val">#1C69D4</span></div>
+            <div class="token-pill"><span class="token-swatch" style="background:#017EA4;"></span><span class="token-name">teal/600</span><span class="token-val">#017EA4</span></div>
+            <div class="token-pill"><span class="token-swatch" style="background:#0062FF;"></span><span class="token-name">blue/400</span><span class="token-val">#0062FF</span></div>
+            <div class="token-pill"><span class="token-swatch" style="background:#6D30A7;"></span><span class="token-name">purple/600</span><span class="token-val">#6D30A7</span></div>
+            <div class="token-pill"><span class="token-swatch" style="background:#177375;"></span><span class="token-name">teal/700</span><span class="token-val">#177375</span></div>
+            <div class="token-pill"><span class="token-swatch" style="background:#484EA0;"></span><span class="token-name">indigo/500</span><span class="token-val">#484EA0</span></div>
           </div>
-
           <!-- SEMANTIC -->
           <div class="var-col">
-            <div class="token-pill">
-              <span class="token-swatch" style="background:#1C69D4;"></span>
-              <span class="token-name">action/primary</span>
-              <span class="token-val">BMW</span>
-            </div>
-            <div class="token-pill">
-              <span class="token-swatch" style="background:#017EA4;"></span>
-              <span class="token-name">action/primary</span>
-              <span class="token-val">MINI</span>
-            </div>
-            <div class="token-pill">
-              <span class="token-swatch" style="background:#0062FF;"></span>
-              <span class="token-name">action/primary</span>
-              <span class="token-val">Motorrad</span>
-            </div>
-            <div class="token-pill">
-              <span class="token-swatch" style="background:#6D30A7;"></span>
-              <span class="token-name">action/primary</span>
-              <span class="token-val">Rolls-Royce</span>
-            </div>
-            <div class="token-pill">
-              <span class="token-swatch" style="background:#177375;"></span>
-              <span class="token-name">action/primary</span>
-              <span class="token-val">Alpina</span>
-            </div>
-            <div class="token-pill">
-              <span class="token-swatch" style="background:#484EA0;"></span>
-              <span class="token-name">action/primary</span>
-              <span class="token-val">Alphabet</span>
-            </div>
+            <div class="token-pill"><span class="token-swatch" style="background:#1C69D4;"></span><span class="token-name">action/primary</span><span class="token-val">BMW</span></div>
+            <div class="token-pill"><span class="token-swatch" style="background:#017EA4;"></span><span class="token-name">action/primary</span><span class="token-val">MINI</span></div>
+            <div class="token-pill"><span class="token-swatch" style="background:#0062FF;"></span><span class="token-name">action/primary</span><span class="token-val">Motorrad</span></div>
+            <div class="token-pill"><span class="token-swatch" style="background:#6D30A7;"></span><span class="token-name">action/primary</span><span class="token-val">Rolls-Royce</span></div>
+            <div class="token-pill"><span class="token-swatch" style="background:#177375;"></span><span class="token-name">action/primary</span><span class="token-val">Alpina</span></div>
+            <div class="token-pill"><span class="token-swatch" style="background:#484EA0;"></span><span class="token-name">action/primary</span><span class="token-val">Alphabet</span></div>
           </div>
-
           <!-- COMPONENT -->
           <div class="var-col">
-            <div class="token-pill">
-              <span class="token-swatch" style="background:#1C69D4;"></span>
-              <span class="token-name">button/bg</span>
-              <span class="token-val">→ action/primary</span>
-            </div>
-            <div class="token-pill">
-              <span class="token-swatch" style="background:#017EA4;"></span>
-              <span class="token-name">button/bg</span>
-              <span class="token-val">→ action/primary</span>
-            </div>
-            <div class="token-pill">
-              <span class="token-swatch" style="background:#0062FF;"></span>
-              <span class="token-name">button/bg</span>
-              <span class="token-val">→ action/primary</span>
-            </div>
-            <div class="token-pill">
-              <span class="token-swatch" style="background:#6D30A7;"></span>
-              <span class="token-name">button/bg</span>
-              <span class="token-val">→ action/primary</span>
-            </div>
-            <div class="token-pill">
-              <span class="token-swatch" style="background:#177375;"></span>
-              <span class="token-name">button/bg</span>
-              <span class="token-val">→ action/primary</span>
-            </div>
-            <div class="token-pill">
-              <span class="token-swatch" style="background:#484EA0;"></span>
-              <span class="token-name">button/bg</span>
-              <span class="token-val">→ action/primary</span>
-            </div>
+            <div class="token-pill"><span class="token-swatch" style="background:#1C69D4;"></span><span class="token-name">button/bg</span><span class="token-val">→ action/primary</span></div>
+            <div class="token-pill"><span class="token-swatch" style="background:#017EA4;"></span><span class="token-name">button/bg</span><span class="token-val">→ action/primary</span></div>
+            <div class="token-pill"><span class="token-swatch" style="background:#0062FF;"></span><span class="token-name">button/bg</span><span class="token-val">→ action/primary</span></div>
+            <div class="token-pill"><span class="token-swatch" style="background:#6D30A7;"></span><span class="token-name">button/bg</span><span class="token-val">→ action/primary</span></div>
+            <div class="token-pill"><span class="token-swatch" style="background:#177375;"></span><span class="token-name">button/bg</span><span class="token-val">→ action/primary</span></div>
+            <div class="token-pill"><span class="token-swatch" style="background:#484EA0;"></span><span class="token-name">button/bg</span><span class="token-val">→ action/primary</span></div>
           </div>
         </div>
       </div>
