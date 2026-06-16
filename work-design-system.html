@@ -861,50 +861,26 @@
         <p>Switch between brand modes below. Every component — button, badge, progress indicator, nav item — updates simultaneously. No component logic changes. Only the active Semantic mode swaps, resolving to different Primitive values underneath.</p>
       </div>
 
-      <div class="brand-demo-wrap">
-        <div class="brand-demo-header">
-          <span class="brand-demo-title">Brand Mode → Component Resolution</span>
-          <div class="brand-switcher">
-            <button class="brand-btn active" data-brand="a" onclick="swapBrand('a')">Brand A</button>
-            <button class="brand-btn" data-brand="b" onclick="swapBrand('b')">Brand B</button>
-            <button class="brand-btn" data-brand="c" onclick="swapBrand('c')">Brand C</button>
-            <button class="brand-btn" data-brand="d" onclick="swapBrand('d')">Brand D</button>
-            <button class="brand-btn" data-brand="e" onclick="swapBrand('e')">Brand E</button>
-            <button class="brand-btn" data-brand="f" onclick="swapBrand('f')">Brand F</button>
-          </div>
-        </div>
-        <div class="brand-demo-body">
+       <div class="brand-demo-body">
           <div class="comp-preview">
-            <div class="comp-preview-label">Component Preview</div>
-
+            <div class="comp-preview-label">Components</div>
+            <button class="comp-btn" id="demo-btn">Primary Action</button>
+            <span class="comp-badge" id="demo-badge">Active Status</span>
             <div>
-              <div class="comp-preview-label" style="margin-bottom:0.75rem;">Primary Button</div>
-              <button class="comp-btn" id="demo-btn">Explore Models</button>
-            </div>
-
-            <div>
-              <div class="comp-preview-label" style="margin-bottom:0.75rem;">Status Badge</div>
-              <div class="comp-badge" id="demo-badge">Active</div>
-            </div>
-
-            <div>
-              <div class="comp-preview-label" style="margin-bottom:0.75rem;">Progress Indicator</div>
+              <div class="comp-preview-label" style="margin-bottom:0.5rem;">Progress</div>
               <div class="comp-progress-bar">
                 <div class="comp-progress-fill" id="demo-progress"></div>
               </div>
             </div>
-
-            <div>
-              <div class="comp-preview-label" style="margin-bottom:0.75rem;">Nav Items</div>
-              <div class="comp-nav-item" id="demo-nav-1" style="color:var(--white);">Overview</div>
-              <div class="comp-nav-item" id="demo-nav-2" style="color:var(--muted);">Models</div>
-              <div class="comp-nav-item" id="demo-nav-3" style="color:var(--muted);">Technology</div>
+            <div style="margin-top:0.5rem;">
+              <div class="comp-nav-item" id="demo-nav-1">Dashboard</div>
+              <div class="comp-nav-item">Reports</div>
+              <div class="comp-nav-item">Settings</div>
             </div>
           </div>
 
-          <div class="token-resolve" id="token-resolve-panel">
-            <div class="comp-preview-label" style="margin-bottom:0.5rem;">Token Resolution</div>
-            <!-- Rows injected by JS -->
+          <div class="comp-preview token-resolve" id="token-resolve-panel">
+            <!-- Populated by swapBrand() -->
           </div>
         </div>
       </div>
@@ -919,115 +895,121 @@
       </div>
 
       <div class="var-diagram">
-        <div class="var-diagram-header">
+         <div class="var-diagram-header">
           <div class="var-layer-head">
             <div class="var-layer-head-label">Layer 01</div>
             <div class="var-layer-head-title">Primitive</div>
           </div>
           <div class="var-layer-head active">
-            <div class="var-layer-head-label">Layer 02 — Mode Switch</div>
-            <div class="var-layer-head-title">Semantic / Brand</div>
+            <div class="var-layer-head-label">Layer 02</div>
+            <div class="var-layer-head-title">Semantic</div>
           </div>
           <div class="var-layer-head">
             <div class="var-layer-head-label">Layer 03</div>
             <div class="var-layer-head-title">Component</div>
           </div>
         </div>
-        <div class="var-diagram-body">
-          <!-- Primitive col -->
+        </div>
+                <div class="var-diagram-body">
+          <!-- PRIMITIVE -->
           <div class="var-col">
             <div class="token-pill">
-              <div class="token-swatch" style="background:#0A56E8;"></div>
-              <span class="token-name">color/blue/500</span>
-              <span class="token-val">#0A56E8</span>
+              <span class="token-swatch" style="background:#1C69D4;"></span>
+              <span class="token-name">blue/500</span>
+              <span class="token-val">#1C69D4</span>
             </div>
             <div class="token-pill">
-              <div class="token-swatch" style="background:#CC1A1A;"></div>
-              <span class="token-name">color/red/500</span>
-              <span class="token-val">#CC1A1A</span>
+              <span class="token-swatch" style="background:#017EA4;"></span>
+              <span class="token-name">teal/600</span>
+              <span class="token-val">#017EA4</span>
             </div>
             <div class="token-pill">
-              <div class="token-swatch" style="background:#0A0A0A; border-color:rgba(255,255,255,0.2);"></div>
-              <span class="token-name">color/black/900</span>
-              <span class="token-val">#0A0A0A</span>
+              <span class="token-swatch" style="background:#0062FF;"></span>
+              <span class="token-name">blue/400</span>
+              <span class="token-val">#0062FF</span>
             </div>
             <div class="token-pill">
-              <div class="token-swatch" style="background:#1B6B3A;"></div>
-              <span class="token-name">color/green/600</span>
-              <span class="token-val">#1B6B3A</span>
+              <span class="token-swatch" style="background:#6D30A7;"></span>
+              <span class="token-name">purple/600</span>
+              <span class="token-val">#6D30A7</span>
             </div>
             <div class="token-pill">
-              <div class="token-swatch" style="background:#7B2FBE;"></div>
-              <span class="token-name">color/plum/600</span>
-              <span class="token-val">#7B2FBE</span>
+              <span class="token-swatch" style="background:#177375;"></span>
+              <span class="token-name">teal/700</span>
+              <span class="token-val">#177375</span>
             </div>
             <div class="token-pill">
-              <div class="token-swatch" style="background:#B86C00;"></div>
-              <span class="token-name">color/amber/600</span>
-              <span class="token-val">#B86C00</span>
+              <span class="token-swatch" style="background:#484EA0;"></span>
+              <span class="token-name">indigo/500</span>
+              <span class="token-val">#484EA0</span>
             </div>
           </div>
-          <!-- Semantic col -->
+
+          <!-- SEMANTIC -->
           <div class="var-col">
-            <div style="margin-bottom:0.25rem;">
-              <div class="brand-mode-tabs">
-                <span class="brand-tab active">Brand A</span>
-                <span class="brand-tab">Brand B</span>
-                <span class="brand-tab">Brand C</span>
-              </div>
-            </div>
-            <div class="token-pill" style="border-color:rgba(0,255,179,0.2);">
-              <div class="token-swatch" style="background:#0A56E8;"></div>
-              <span class="token-name">semantic/primary</span>
-              <span class="token-val" style="color:rgba(0,255,179,0.5);">→ blue/500</span>
+            <div class="token-pill">
+              <span class="token-swatch" style="background:#1C69D4;"></span>
+              <span class="token-name">action/primary</span>
+              <span class="token-val">BMW</span>
             </div>
             <div class="token-pill">
-              <div class="token-swatch" style="background:#ffffff;"></div>
-              <span class="token-name">semantic/on-primary</span>
-              <span class="token-val">→ white/000</span>
+              <span class="token-swatch" style="background:#017EA4;"></span>
+              <span class="token-name">action/primary</span>
+              <span class="token-val">MINI</span>
             </div>
             <div class="token-pill">
-              <div class="token-swatch" style="background:#f0f4ff;"></div>
-              <span class="token-name">semantic/surface</span>
-              <span class="token-val">→ white/000</span>
+              <span class="token-swatch" style="background:#0062FF;"></span>
+              <span class="token-name">action/primary</span>
+              <span class="token-val">Motorrad</span>
             </div>
             <div class="token-pill">
-              <div class="token-swatch" style="background:#0A56E8; opacity:0.12;"></div>
-              <span class="token-name">semantic/subtle</span>
-              <span class="token-val">→ blue/050</span>
+              <span class="token-swatch" style="background:#6D30A7;"></span>
+              <span class="token-name">action/primary</span>
+              <span class="token-val">Rolls-Royce</span>
             </div>
             <div class="token-pill">
-              <div class="token-swatch" style="background:#0A0A0A; border-color:rgba(255,255,255,0.2);"></div>
-              <span class="token-name">semantic/foreground</span>
-              <span class="token-val">→ black/900</span>
+              <span class="token-swatch" style="background:#177375;"></span>
+              <span class="token-name">action/primary</span>
+              <span class="token-val">Alpina</span>
+            </div>
+            <div class="token-pill">
+              <span class="token-swatch" style="background:#484EA0;"></span>
+              <span class="token-name">action/primary</span>
+              <span class="token-val">Alphabet</span>
             </div>
           </div>
-          <!-- Component col -->
+
+          <!-- COMPONENT -->
           <div class="var-col">
-            <div class="token-pill" style="background:#111;">
-              <div class="token-swatch" style="background:#0A56E8;"></div>
-              <span class="token-name">btn/background</span>
-              <span class="token-val" style="color:rgba(0,255,179,0.5);">→ primary</span>
+            <div class="token-pill">
+              <span class="token-swatch" style="background:#1C69D4;"></span>
+              <span class="token-name">button/bg</span>
+              <span class="token-val">→ action/primary</span>
             </div>
-            <div class="token-pill" style="background:#111;">
-              <div class="token-swatch" style="background:#ffffff;"></div>
-              <span class="token-name">btn/label</span>
-              <span class="token-val" style="color:rgba(0,255,179,0.5);">→ on-primary</span>
+            <div class="token-pill">
+              <span class="token-swatch" style="background:#017EA4;"></span>
+              <span class="token-name">button/bg</span>
+              <span class="token-val">→ action/primary</span>
             </div>
-            <div class="token-pill" style="background:#111;">
-              <div class="token-swatch" style="background:#0A56E8;"></div>
-              <span class="token-name">badge/border</span>
-              <span class="token-val" style="color:rgba(0,255,179,0.5);">→ primary</span>
+            <div class="token-pill">
+              <span class="token-swatch" style="background:#0062FF;"></span>
+              <span class="token-name">button/bg</span>
+              <span class="token-val">→ action/primary</span>
             </div>
-            <div class="token-pill" style="background:#111;">
-              <div class="token-swatch" style="background:#0A56E8;"></div>
-              <span class="token-name">nav/active-dot</span>
-              <span class="token-val" style="color:rgba(0,255,179,0.5);">→ primary</span>
+            <div class="token-pill">
+              <span class="token-swatch" style="background:#6D30A7;"></span>
+              <span class="token-name">button/bg</span>
+              <span class="token-val">→ action/primary</span>
             </div>
-            <div class="token-pill" style="background:#111;">
-              <div class="token-swatch" style="background:#0A56E8;"></div>
-              <span class="token-name">progress/fill</span>
-              <span class="token-val" style="color:rgba(0,255,179,0.5);">→ primary</span>
+            <div class="token-pill">
+              <span class="token-swatch" style="background:#177375;"></span>
+              <span class="token-name">button/bg</span>
+              <span class="token-val">→ action/primary</span>
+            </div>
+            <div class="token-pill">
+              <span class="token-swatch" style="background:#484EA0;"></span>
+              <span class="token-name">button/bg</span>
+              <span class="token-val">→ action/primary</span>
             </div>
           </div>
         </div>
