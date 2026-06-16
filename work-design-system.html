@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi-Brand Design System — Ellis Victoria</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --white: #f5f5f0;
+      --cyan: #00ffb3;
+      --blue: #2440ee;
+      --mid: #1a1a1a;
+      --muted: #888880;
+      --border: rgba(245,245,240,0.12);
+      --font-display: 'Syne', sans-serif;
+      --font-mono: 'Space Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--font-display);
+      overflow-x: hidden;
+      cursor: crosshair;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 3rem;
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(20px);
+      background: rgba(10,10,10,0.85);
+    }
+    .nav-logo {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      color: var(--cyan);
+      text-transform: uppercase;
+    }
+    .nav-back {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--cyan); }
+    .nav-back::before { content: '←'; }
+
+    /* HERO */
+    .cs-hero {
+      min-height: 60vh;
+      padding: 10rem 3rem 6rem;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: end;
+    }
+    .cs-hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(245,245,240,0.02) 40px, rgba(245,245,240,0.02) 41px),
+        repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(245,245,240,0.02) 40px, rgba(245,245,240,0.02) 41px);
+      pointer-events: none;
+    }
+    .cs-hero-accent {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--cyan) 0%, transparent 60%);
+    }
+    .cs-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .cs-label::before {
+      content: '';
+      display: inline-block;
+      width: 1.5rem;
+      height: 1px;
+      background: var(--cyan);
+    }
+    .cs-title {
+      font-size: clamp(2.5rem, 5vw, 5rem);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      margin-bottom: 2rem;
+    }
+    .cs-title span {
+      display: block;
+      color: transparent;
+      -webkit-text-stroke: 1px var(--white);
+    }
+    .cs-nda {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px dashed rgba(245,245,240,0.15);
+      padding: 0.6rem 1rem;
+    }
+    .cs-nda-icon { color: var(--cyan); }
+    .cs-hero-right {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      padding-bottom: 0.5rem;
+    }
+    .cs-meta-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .cs-meta-cell {
+      background: var(--black);
+      padding: 1.25rem;
+    }
+    .cs-meta-key {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+    .cs-meta-val {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--white);
+    }
+    .cs-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .cs-tag {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      padding: 0.3rem 0.7rem;
+      background: rgba(0,255,179,0.07);
+      border: 1px solid rgba(0,255,179,0.2);
+      color: var(--cyan);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* BODY SECTIONS */
+    .cs-body {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .cs-section {
+      padding: 6rem 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .cs-section-label {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .cs-section-label::before {
+      content: '';
+      display: inline-block;
+      width: 1.5rem;
+      height: 1px;
+      background: var(--cyan);
+    }
+    .cs-section-title {
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      margin-bottom: 2.5rem;
+    }
+    .cs-section-title em {
+      font-style: normal;
+      color: transparent;
+      -webkit-text-stroke: 1px var(--white);
+    }
+    .cs-prose {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      line-height: 1.9;
+      color: rgba(245,245,240,0.7);
+      max-width: 66ch;
+    }
+    .cs-prose p + p { margin-top: 1.5em; }
+    .cs-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    /* VARIABLE ARCHITECTURE DIAGRAM */
+    .var-diagram {
+      margin-top: 4rem;
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .var-diagram-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .var-layer-head {
+      background: var(--mid);
+      padding: 1.25rem 1.5rem;
+      text-align: center;
+    }
+    .var-layer-head-label {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+    .var-layer-head-title {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--white);
+    }
+    .var-layer-head.active .var-layer-head-title { color: var(--cyan); }
+
+    .var-diagram-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+    }
+    .var-col {
+      background: var(--black);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    /* Token pills */
+    .token-pill {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.65rem 0.85rem;
+      background: var(--mid);
+      border: 1px solid var(--border);
+      position: relative;
+    }
+    .token-pill::after {
+      content: '';
+      position: absolute;
+      right: -1px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1.5rem;
+      height: 1px;
+      background: var(--border);
+    }
+    .var-col:last-child .token-pill::after { display: none; }
+    .token-swatch {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .token-name {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      flex: 1;
+    }
+    .token-val {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      color: rgba(245,245,240,0.3);
+    }
+
+    /* Brand mode columns */
+    .brand-mode-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .brand-tab {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.75rem;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.15s;
+      background: transparent;
+    }
+    .brand-tab.active {
+      border-color: var(--cyan);
+      color: var(--cyan);
+      background: rgba(0,255,179,0.06);
+    }
+    .brand-tab:hover { border-color: rgba(245,245,240,0.3); color: var(--white); }
+
+    /* Brand swap live demo */
+    .brand-demo-wrap {
+      margin-top: 4rem;
+      border: 1px solid var(--border);
+    }
+    .brand-demo-header {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      background: var(--mid);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand-demo-title {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .brand-switcher {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .brand-btn {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.9rem;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s;
+      background: transparent;
+    }
+    .brand-btn.active {
+      color: var(--black);
+      border-color: transparent;
+    }
+    .brand-demo-body {
+      padding: 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    /* Component preview */
+    .comp-preview {
+      border: 1px solid var(--border);
+      padding: 2rem;
+      background: var(--mid);
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .comp-preview-label {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    .comp-btn {
+      padding: 0.75rem 1.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: default;
+      border: none;
+      transition: background 0.3s, color 0.3s;
+      display: inline-block;
+      width: fit-content;
+    }
+    .comp-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.3rem 0.7rem;
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 1px solid;
+      transition: all 0.3s;
+      width: fit-content;
+    }
+    .comp-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+      flex-shrink: 0;
+    }
+    .comp-progress-bar {
+      height: 4px;
+      width: 100%;
+      background: rgba(245,245,240,0.08);
+      position: relative;
+      overflow: hidden;
+    }
+    .comp-progress-fill {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 65%;
+      transition: background 0.3s;
+    }
+    .comp-nav-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: color 0.3s;
+    }
+    .comp-nav-item::before {
+      content: '';
+      width: 10px;
+      height: 10px;
+      flex-shrink: 0;
+      transition: background 0.3s;
+    }
+
+    /* Token resolve panel */
+    .token-resolve {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .resolve-row {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      background: rgba(245,245,240,0.03);
+      border: 1px solid var(--border);
+    }
+    .resolve-token-name {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+    .resolve-arrow {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, var(--border) 0%, rgba(0,255,179,0.3) 100%);
+      position: relative;
+    }
+    .resolve-arrow::after {
+      content: '→';
+      position: absolute;
+      right: -8px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.7rem;
+      color: rgba(0,255,179,0.4);
+    }
+    .resolve-value {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--white);
+      letter-spacing: 0.05em;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      white-space: nowrap;
+    }
+    .resolve-swatch {
+      width: 12px;
+      height: 12px;
+      flex-shrink: 0;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: background 0.3s;
+    }
+
+    /* PROCESS STEPS */
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-top: 3rem;
+    }
+    .process-step {
+      background: var(--black);
+      padding: 2.5rem 2rem;
+      position: relative;
+    }
+    .process-num {
+      font-family: var(--font-display);
+      font-size: 4rem;
+      font-weight: 800;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(245,245,240,0.06);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+    .process-step-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .process-step-desc {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      line-height: 1.75;
+      color: var(--muted);
+    }
+    .process-accent {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--cyan) 0%, transparent 60%);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    .process-step:hover .process-accent { transform: scaleX(1); }
+
+    /* OUTCOMES */
+    .outcomes-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-top: 3rem;
+    }
+    .outcome-cell {
+      background: var(--black);
+      padding: 2rem;
+      text-align: center;
+    }
+    .outcome-num {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--cyan);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .outcome-label {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* LAYER EXPLAINER */
+    .layer-explainer {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-top: 3rem;
+    }
+    .layer-card {
+      background: var(--black);
+      padding: 2.5rem 2rem;
+      border-top: 2px solid transparent;
+    }
+    .layer-card:nth-child(1) { border-top-color: rgba(245,245,240,0.15); }
+    .layer-card:nth-child(2) { border-top-color: rgba(36,64,238,0.6); }
+    .layer-card:nth-child(3) { border-top-color: var(--cyan); }
+    .layer-card-num {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+    .layer-card-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+    }
+    .layer-card-desc {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      line-height: 1.75;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    .layer-example {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .layer-ex-row {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      color: rgba(245,245,240,0.35);
+      padding: 0.4rem 0.6rem;
+      background: var(--mid);
+    }
+    .layer-ex-row span { color: var(--cyan); }
+
+    /* TOOLS */
+    .tools-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 2rem;
+    }
+    .tool-chip {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    /* FOOTER NAV */
+    .cs-foot-nav {
+      padding: 4rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .cs-foot-back {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.2s;
+    }
+    .cs-foot-back:hover { color: var(--cyan); }
+    .cs-foot-back::before { content: '← '; }
+    footer {
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border);
+    }
+    .footer-copy {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    /* REVEAL */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .cs-hero { grid-template-columns: 1fr; padding: 8rem 1.5rem 4rem; }
+      .cs-section { padding: 4rem 1.5rem; }
+      .cs-two-col { grid-template-columns: 1fr; gap: 2rem; }
+      .process-grid { grid-template-columns: 1fr; }
+      .outcomes-grid { grid-template-columns: repeat(2, 1fr); }
+      .layer-explainer { grid-template-columns: 1fr; }
+      .brand-demo-body { grid-template-columns: 1fr; }
+      .var-diagram-header, .var-diagram-body { grid-template-columns: 1fr; }
+      .cs-foot-nav { flex-direction: column; gap: 1.5rem; padding: 3rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">EV / Portfolio</a>
+    <a href="index.html#work" class="nav-back">Back to work</a>
+  </nav>
+
+  <!-- HERO -->
+  <header class="cs-hero">
+    <div class="cs-hero-bg"></div>
+    <div class="cs-hero-accent"></div>
+
+    <div class="cs-hero-left">
+      <div class="cs-label">Case Study · 01</div>
+      <h1 class="cs-title">
+        Multi-Brand<br>
+        <span>Design System</span>
+      </h1>
+      <div class="cs-nda">
+        <span class="cs-nda-icon">◈</span>
+        Under NDA — visuals available on request
+      </div>
+    </div>
+
+    <div class="cs-hero-right">
+      <div class="cs-meta-row">
+        <div class="cs-meta-cell">
+          <div class="cs-meta-key">Year</div>
+          <div class="cs-meta-val">2022 – Present</div>
+        </div>
+        <div class="cs-meta-cell">
+          <div class="cs-meta-key">Role</div>
+          <div class="cs-meta-val">Lead Product Designer</div>
+        </div>
+        <div class="cs-meta-cell">
+          <div class="cs-meta-key">Scope</div>
+          <div class="cs-meta-val">6+ Brand Identities</div>
+        </div>
+        <div class="cs-meta-cell">
+          <div class="cs-meta-key">Scale</div>
+          <div class="cs-meta-val">Global / Enterprise</div>
+        </div>
+      </div>
+      <div class="cs-tags">
+        <span class="cs-tag">Design System</span>
+        <span class="cs-tag">Figma Variables</span>
+        <span class="cs-tag">Tokens Studio</span>
+        <span class="cs-tag">Multi-brand</span>
+        <span class="cs-tag">Accessibility</span>
+        <span class="cs-tag">WCAG AA</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="cs-body">
+
+    <!-- OVERVIEW -->
+    <section class="cs-section reveal">
+      <div class="cs-label">Overview</div>
+      <div class="cs-two-col">
+        <div>
+          <h2 class="cs-section-title">One system.<br><em>Six identities.</em></h2>
+          <div class="cs-prose">
+            <p>Designing a single component library that can faithfully represent six distinct brand identities — each with their own visual language, typography, colour philosophy and interaction patterns — without duplicating components or fracturing the system.</p>
+            <p>The challenge was architectural: how do you build once and deploy everywhere, while preserving the identity of each brand so thoroughly that no user ever notices they're looking at the same component underneath?</p>
+          </div>
+        </div>
+        <div class="cs-prose" style="padding-top: 4.5rem;">
+          <p>The answer was a three-layer Figma variable architecture — Primitive, Semantic, and Component — where swapping a single brand mode cascades through every token in the system, updating 100% of components instantly and consistently.</p>
+          <p>This case study documents the architectural thinking, the token structure, and the live interactive demo you can explore below.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOKEN ARCHITECTURE -->
+    <section class="cs-section reveal">
+      <div class="cs-label">Architecture</div>
+      <h2 class="cs-section-title">The Three-Layer<br><em>Token Model</em></h2>
+      <div class="cs-prose">
+        <p>Figma Variables are structured in three distinct collections, each serving a specific role. No layer can skip another — all references must travel the full chain from Primitive through Semantic to Component.</p>
+      </div>
+
+      <div class="layer-explainer">
+        <div class="layer-card">
+          <div class="layer-card-num">Layer 01 / Primitive</div>
+          <div class="layer-card-title">Raw Values</div>
+          <div class="layer-card-desc">The foundation. Pure, literal values — hex codes, pixel values, type sizes. No context, no meaning, no aliases. One source of truth for every value in the system.</div>
+          <div class="layer-example">
+            <div class="layer-ex-row">color/blue/<span>500</span> = #0A56E8</div>
+            <div class="layer-ex-row">color/red/<span>500</span> = #CC1A1A</div>
+            <div class="layer-ex-row">color/black/<span>900</span> = #0A0A0A</div>
+            <div class="layer-ex-row">spacing/<span>04</span> = 16px</div>
+            <div class="layer-ex-row">radius/<span>none</span> = 0px</div>
+          </div>
+        </div>
+        <div class="layer-card">
+          <div class="layer-card-num">Layer 02 / Semantic</div>
+          <div class="layer-card-title">Brand Aliases</div>
+          <div class="layer-card-desc">The brand layer. Each brand is a separate Mode in this collection. Tokens describe intent — "primary", "surface", "on-primary" — and each mode resolves to different Primitive values.</div>
+          <div class="layer-example">
+            <div class="layer-ex-row"><span>[Brand A]</span> primary → blue/500</div>
+            <div class="layer-ex-row"><span>[Brand B]</span> primary → red/500</div>
+            <div class="layer-ex-row"><span>[Brand C]</span> primary → black/900</div>
+            <div class="layer-ex-row"><span>[Brand A]</span> surface → white/000</div>
+            <div class="layer-ex-row"><span>[Brand B]</span> surface → grey/050</div>
+          </div>
+        </div>
+        <div class="layer-card">
+          <div class="layer-card-num">Layer 03 / Component</div>
+          <div class="layer-card-title">Component Tokens</div>
+          <div class="layer-card-desc">The topmost layer. Every component property — button background, border colour, icon colour — maps to a Semantic token. Never a Primitive directly.</div>
+          <div class="layer-example">
+            <div class="layer-ex-row">button/bg → <span>semantic/primary</span></div>
+            <div class="layer-ex-row">button/fg → <span>semantic/on-primary</span></div>
+            <div class="layer-ex-row">badge/border → <span>semantic/primary</span></div>
+            <div class="layer-ex-row">nav/accent → <span>semantic/primary</span></div>
+            <div class="layer-ex-row">input/focus → <span>semantic/primary</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIVE BRAND SWAP DEMO -->
+    <section class="cs-section reveal">
+      <div class="cs-label">Interactive Demo</div>
+      <h2 class="cs-section-title">Brand Swap<br><em>In Action</em></h2>
+      <div class="cs-prose">
+        <p>Switch between brand modes below. Every component — button, badge, progress indicator, nav item — updates simultaneously. No component logic changes. Only the active Semantic mode swaps, resolving to different Primitive values underneath.</p>
+      </div>
+
+      <div class="brand-demo-wrap">
+        <div class="brand-demo-header">
+          <span class="brand-demo-title">Brand Mode → Component Resolution</span>
+          <div class="brand-switcher">
+            <button class="brand-btn active" data-brand="a" onclick="swapBrand('a')">Brand A</button>
+            <button class="brand-btn" data-brand="b" onclick="swapBrand('b')">Brand B</button>
+            <button class="brand-btn" data-brand="c" onclick="swapBrand('c')">Brand C</button>
+            <button class="brand-btn" data-brand="d" onclick="swapBrand('d')">Brand D</button>
+            <button class="brand-btn" data-brand="e" onclick="swapBrand('e')">Brand E</button>
+            <button class="brand-btn" data-brand="f" onclick="swapBrand('f')">Brand F</button>
+          </div>
+        </div>
+        <div class="brand-demo-body">
+          <div class="comp-preview">
+            <div class="comp-preview-label">Component Preview</div>
+
+            <div>
+              <div class="comp-preview-label" style="margin-bottom:0.75rem;">Primary Button</div>
+              <button class="comp-btn" id="demo-btn">Explore Models</button>
+            </div>
+
+            <div>
+              <div class="comp-preview-label" style="margin-bottom:0.75rem;">Status Badge</div>
+              <div class="comp-badge" id="demo-badge">Active</div>
+            </div>
+
+            <div>
+              <div class="comp-preview-label" style="margin-bottom:0.75rem;">Progress Indicator</div>
+              <div class="comp-progress-bar">
+                <div class="comp-progress-fill" id="demo-progress"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="comp-preview-label" style="margin-bottom:0.75rem;">Nav Items</div>
+              <div class="comp-nav-item" id="demo-nav-1" style="color:var(--white);">Overview</div>
+              <div class="comp-nav-item" id="demo-nav-2" style="color:var(--muted);">Models</div>
+              <div class="comp-nav-item" id="demo-nav-3" style="color:var(--muted);">Technology</div>
+            </div>
+          </div>
+
+          <div class="token-resolve" id="token-resolve-panel">
+            <div class="comp-preview-label" style="margin-bottom:0.5rem;">Token Resolution</div>
+            <!-- Rows injected by JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VARIABLE ARCHITECTURE SCHEMATIC -->
+    <section class="cs-section reveal">
+      <div class="cs-label">Variable Structure</div>
+      <h2 class="cs-section-title">How Variables<br><em>Connect Across Brands</em></h2>
+      <div class="cs-prose">
+        <p>The diagram below shows the full token chain for a primary action token across three brand modes. Swapping the active mode in the Semantic layer is the only action required — everything else propagates automatically.</p>
+      </div>
+
+      <div class="var-diagram">
+        <div class="var-diagram-header">
+          <div class="var-layer-head">
+            <div class="var-layer-head-label">Layer 01</div>
+            <div class="var-layer-head-title">Primitive</div>
+          </div>
+          <div class="var-layer-head active">
+            <div class="var-layer-head-label">Layer 02 — Mode Switch</div>
+            <div class="var-layer-head-title">Semantic / Brand</div>
+          </div>
+          <div class="var-layer-head">
+            <div class="var-layer-head-label">Layer 03</div>
+            <div class="var-layer-head-title">Component</div>
+          </div>
+        </div>
+        <div class="var-diagram-body">
+          <!-- Primitive col -->
+          <div class="var-col">
+            <div class="token-pill">
+              <div class="token-swatch" style="background:#0A56E8;"></div>
+              <span class="token-name">color/blue/500</span>
+              <span class="token-val">#0A56E8</span>
+            </div>
+            <div class="token-pill">
+              <div class="token-swatch" style="background:#CC1A1A;"></div>
+              <span class="token-name">color/red/500</span>
+              <span class="token-val">#CC1A1A</span>
+            </div>
+            <div class="token-pill">
+              <div class="token-swatch" style="background:#0A0A0A; border-color:rgba(255,255,255,0.2);"></div>
+              <span class="token-name">color/black/900</span>
+              <span class="token-val">#0A0A0A</span>
+            </div>
+            <div class="token-pill">
+              <div class="token-swatch" style="background:#1B6B3A;"></div>
+              <span class="token-name">color/green/600</span>
+              <span class="token-val">#1B6B3A</span>
+            </div>
+            <div class="token-pill">
+              <div class="token-swatch" style="background:#7B2FBE;"></div>
+              <span class="token-name">color/plum/600</span>
+              <span class="token-val">#7B2FBE</span>
+            </div>
+            <div class="token-pill">
+              <div class="token-swatch" style="background:#B86C00;"></div>
+              <span class="token-name">color/amber/600</span>
+              <span class="token-val">#B86C00</span>
+            </div>
+          </div>
+          <!-- Semantic col -->
+          <div class="var-col">
+            <div style="margin-bottom:0.25rem;">
+              <div class="brand-mode-tabs">
+                <span class="brand-tab active">Brand A</span>
+                <span class="brand-tab">Brand B</span>
+                <span class="brand-tab">Brand C</span>
+              </div>
+            </div>
+            <div class="token-pill" style="border-color:rgba(0,255,179,0.2);">
+              <div class="token-swatch" style="background:#0A56E8;"></div>
+              <span class="token-name">semantic/primary</span>
+              <span class="token-val" style="color:rgba(0,255,179,0.5);">→ blue/500</span>
+            </div>
+            <div class="token-pill">
+              <div class="token-swatch" style="background:#ffffff;"></div>
+              <span class="token-name">semantic/on-primary</span>
+              <span class="token-val">→ white/000</span>
+            </div>
+            <div class="token-pill">
+              <div class="token-swatch" style="background:#f0f4ff;"></div>
+              <span class="token-name">semantic/surface</span>
+              <span class="token-val">→ white/000</span>
+            </div>
+            <div class="token-pill">
+              <div class="token-swatch" style="background:#0A56E8; opacity:0.12;"></div>
+              <span class="token-name">semantic/subtle</span>
+              <span class="token-val">→ blue/050</span>
+            </div>
+            <div class="token-pill">
+              <div class="token-swatch" style="background:#0A0A0A; border-color:rgba(255,255,255,0.2);"></div>
+              <span class="token-name">semantic/foreground</span>
+              <span class="token-val">→ black/900</span>
+            </div>
+          </div>
+          <!-- Component col -->
+          <div class="var-col">
+            <div class="token-pill" style="background:#111;">
+              <div class="token-swatch" style="background:#0A56E8;"></div>
+              <span class="token-name">btn/background</span>
+              <span class="token-val" style="color:rgba(0,255,179,0.5);">→ primary</span>
+            </div>
+            <div class="token-pill" style="background:#111;">
+              <div class="token-swatch" style="background:#ffffff;"></div>
+              <span class="token-name">btn/label</span>
+              <span class="token-val" style="color:rgba(0,255,179,0.5);">→ on-primary</span>
+            </div>
+            <div class="token-pill" style="background:#111;">
+              <div class="token-swatch" style="background:#0A56E8;"></div>
+              <span class="token-name">badge/border</span>
+              <span class="token-val" style="color:rgba(0,255,179,0.5);">→ primary</span>
+            </div>
+            <div class="token-pill" style="background:#111;">
+              <div class="token-swatch" style="background:#0A56E8;"></div>
+              <span class="token-name">nav/active-dot</span>
+              <span class="token-val" style="color:rgba(0,255,179,0.5);">→ primary</span>
+            </div>
+            <div class="token-pill" style="background:#111;">
+              <div class="token-swatch" style="background:#0A56E8;"></div>
+              <span class="token-name">progress/fill</span>
+              <span class="token-val" style="color:rgba(0,255,179,0.5);">→ primary</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section class="cs-section reveal" style="background:var(--mid); border-top:1px solid var(--border);">
+      <div class="cs-label">Process</div>
+      <h2 class="cs-section-title">How It Was Built</h2>
+      <div class="process-grid">
+        <div class="process-step">
+          <div class="process-accent"></div>
+          <div class="process-num">01</div>
+          <div class="process-step-title">Brand Audit & Tokenisation</div>
+          <div class="process-step-desc">Analysed all brand identities side by side — extracting shared structural patterns while preserving individual visual languages. Translated brand guidelines into token schemas.</div>
+        </div>
+        <div class="process-step">
+          <div class="process-accent"></div>
+          <div class="process-num">02</div>
+          <div class="process-step-title">Primitive Layer Build</div>
+          <div class="process-step-desc">Established the full colour scales, spacing, typography, and radius values in a shared Primitive collection. Strict naming conventions enforced from day one to prevent drift.</div>
+        </div>
+        <div class="process-step">
+          <div class="process-accent"></div>
+          <div class="process-num">03</div>
+          <div class="process-step-title">Semantic Layer & Modes</div>
+          <div class="process-step-desc">Each brand was added as a mode in the Semantic collection. Intent-based token names (primary, surface, on-primary) ensure components never need to know which brand they're rendering.</div>
+        </div>
+        <div class="process-step">
+          <div class="process-accent"></div>
+          <div class="process-num">04</div>
+          <div class="process-step-title">Component Architecture</div>
+          <div class="process-step-desc">Components built once, pointing exclusively to Semantic tokens. No hardcoded primitives, no brand-specific overrides inside components. Every brand swap is automatic.</div>
+        </div>
+        <div class="process-step">
+          <div class="process-accent"></div>
+          <div class="process-num">05</div>
+          <div class="process-step-title">Tokens Studio & Handoff</div>
+          <div class="process-step-desc">Tokens exported via Tokens Studio for Style Dictionary consumption. Engineering teams receive a single JSON that drives all six brand themes with no manual intervention.</div>
+        </div>
+        <div class="process-step">
+          <div class="process-accent"></div>
+          <div class="process-num">06</div>
+          <div class="process-step-title">Accessibility Validation</div>
+          <div class="process-step-desc">Every brand mode validated independently for WCAG AA contrast ratios. Colour pairings were tested across all component states — rest, hover, focus, disabled — for all six identities.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OUTCOMES -->
+    <section class="cs-section reveal">
+      <div class="cs-label">Outcomes</div>
+      <h2 class="cs-section-title">What Was Delivered</h2>
+      <div class="outcomes-grid">
+        <div class="outcome-cell">
+          <div class="outcome-num">6+</div>
+          <div class="outcome-label">Brand Identities<br>from one system</div>
+        </div>
+        <div class="outcome-cell">
+          <div class="outcome-num">0</div>
+          <div class="outcome-label">Duplicate<br>Components</div>
+        </div>
+        <div class="outcome-cell">
+          <div class="outcome-num">100%</div>
+          <div class="outcome-label">WCAG AA<br>per brand mode</div>
+        </div>
+        <div class="outcome-cell">
+          <div class="outcome-num">1</div>
+          <div class="outcome-label">Token export<br>for all brands</div>
+        </div>
+      </div>
+      <div class="cs-prose" style="margin-top:3rem; max-width:none;">
+        <p>Beyond the numbers, the system fundamentally changed how design and engineering collaborated across brand teams. Designers could confidently test any component in any brand context in seconds. Engineers shipped brand-specific builds from a single shared codebase. Brand managers had a living reference that updated automatically as guidelines evolved.</p>
+      </div>
+
+      <div style="margin-top:2.5rem;">
+        <div class="cs-label" style="margin-bottom:1.5rem;">Tools & Methods</div>
+        <div class="tools-row">
+          <span class="tool-chip">Figma</span>
+          <span class="tool-chip">Figma Variables</span>
+          <span class="tool-chip">Tokens Studio</span>
+          <span class="tool-chip">Style Dictionary</span>
+          <span class="tool-chip">WCAG 2.2</span>
+          <span class="tool-chip">Design Tokens W3C</span>
+          <span class="tool-chip">Component Architecture</span>
+          <span class="tool-chip">Stakeholder Workshops</span>
+          <span class="tool-chip">User Testing</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOT NAV -->
+  <div class="cs-foot-nav">
+    <a href="index.html#work" class="cs-foot-back">All Projects</a>
+    <a href="index.html#contact" class="btn-primary" style="padding:0.85rem 2rem; font-family:var(--font-mono); font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; background:var(--cyan); color:var(--black);">Get in Touch →</a>
+  </div>
+
+  <footer>
+    <span class="footer-copy">© 2026 Ellis Victoria</span>
+    <span class="footer-copy">Senior UX / UI Product Designer</span>
+  </footer>
+
+  <script>
+    // Brand definitions
+    const brands = {
+      a: { name: 'Brand A', primary: '#0A56E8', onPrimary: '#ffffff', subtle: 'rgba(10,86,232,0.12)', label: 'Blue / Corporate', btnText: '#ffffff' },
+      b: { name: 'Brand B', primary: '#CC1A1A', onPrimary: '#ffffff', subtle: 'rgba(204,26,26,0.12)', label: 'Red / Performance', btnText: '#ffffff' },
+      c: { name: 'Brand C', primary: '#0A0A0A', onPrimary: '#f5f5f0', subtle: 'rgba(10,10,10,0.08)', label: 'Black / Luxury', btnText: '#f5f5f0' },
+      d: { name: 'Brand D', primary: '#1B6B3A', onPrimary: '#ffffff', subtle: 'rgba(27,107,58,0.12)', label: 'Green / Mobility', btnText: '#ffffff' },
+      e: { name: 'Brand E', primary: '#7B2FBE', onPrimary: '#ffffff', subtle: 'rgba(123,47,190,0.12)', label: 'Plum / Innovation', btnText: '#ffffff' },
+      f: { name: 'Brand F', primary: '#B86C00', onPrimary: '#ffffff', subtle: 'rgba(184,108,0,0.12)', label: 'Amber / Heritage', btnText: '#ffffff' },
+    };
+
+    function swapBrand(key) {
+      const b = brands[key];
+
+      // Update buttons
+      document.querySelectorAll('.brand-btn').forEach(btn => {
+        const isActive = btn.dataset.brand === key;
+        btn.classList.toggle('active', isActive);
+        btn.style.background = isActive ? b.primary : '';
+        btn.style.color = isActive ? b.onPrimary : '';
+      });
+
+      // Update components
+      const btn = document.getElementById('demo-btn');
+      btn.style.background = b.primary;
+      btn.style.color = b.onPrimary;
+
+      const badge = document.getElementById('demo-badge');
+      badge.style.borderColor = b.primary;
+      badge.style.color = b.primary;
+      badge.style.background = b.subtle;
+
+      const progress = document.getElementById('demo-progress');
+      progress.style.background = b.primary;
+
+      const nav1 = document.getElementById('demo-nav-1');
+      nav1.style.color = b.primary;
+      nav1.querySelector ? null : null;
+      const navItems = document.querySelectorAll('.comp-nav-item');
+      navItems[0].style.color = b.primary;
+      navItems[1].style.color = 'var(--muted)';
+      navItems[2].style.color = 'var(--muted)';
+
+      // Update token resolve panel
+      const panel = document.getElementById('token-resolve-panel');
+      panel.innerHTML = `
+        <div class="comp-preview-label" style="margin-bottom:0.75rem;">Token Resolution · ${b.name}</div>
+        <div class="resolve-row">
+          <span class="resolve-token-name">btn/background</span>
+          <div class="resolve-arrow"></div>
+          <span class="resolve-value"><div class="resolve-swatch" style="background:${b.primary};"></div>${b.primary}</span>
+        </div>
+        <div class="resolve-row">
+          <span class="resolve-token-name">btn/label</span>
+          <div class="resolve-arrow"></div>
+          <span class="resolve-value"><div class="resolve-swatch" style="background:${b.onPrimary}; border-color:rgba(255,255,255,0.15);"></div>${b.onPrimary}</span>
+        </div>
+        <div class="resolve-row">
+          <span class="resolve-token-name">badge/border</span>
+          <div class="resolve-arrow"></div>
+          <span class="resolve-value"><div class="resolve-swatch" style="background:${b.primary};"></div>${b.primary}</span>
+        </div>
+        <div class="resolve-row">
+          <span class="resolve-token-name">progress/fill</span>
+          <div class="resolve-arrow"></div>
+          <span class="resolve-value"><div class="resolve-swatch" style="background:${b.primary};"></div>${b.primary}</span>
+        </div>
+        <div class="resolve-row">
+          <span class="resolve-token-name">nav/active-color</span>
+          <div class="resolve-arrow"></div>
+          <span class="resolve-value"><div class="resolve-swatch" style="background:${b.primary};"></div>${b.primary}</span>
+        </div>
+        <div style="margin-top:1rem; padding:0.75rem 1rem; background:rgba(0,255,179,0.04); border:1px solid rgba(0,255,179,0.15);">
+          <span style="font-family:var(--font-mono); font-size:0.62rem; color:rgba(0,255,179,0.6); letter-spacing:0.1em; text-transform:uppercase;">Mode: ${b.name} · ${b.label}</span>
+        </div>
+      `;
+    }
+
+    // Initialise
+    swapBrand('a');
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
