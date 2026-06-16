@@ -16,7 +16,7 @@
       --cyan: #00ffb3;
       --blue: #2440ee;
       --mid: #1a1a1a;
-      --muted: #888880;
+      --muted: #9a9a92;
       --border: rgba(245,245,240,0.12);
       --font-display: 'Syne', sans-serif;
       --font-mono: 'Space Mono', monospace;
@@ -28,9 +28,26 @@
       color: var(--white);
       font-family: var(--font-display);
       overflow-x: hidden;
-      cursor: crosshair;
+      cursor: default;
     }
     a { color: inherit; text-decoration: none; }
+    a, button, [role="button"] { cursor: pointer; }
+
+    /* Visible keyboard focus (WCAG 2.4.7) */
+    :focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 3px;
+    }
+
+    /* Respect reduced motion (WCAG 2.3.3) */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+      *, *::before, *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+      }
+    }
 
     /* NAV */
     nav {
@@ -154,7 +171,7 @@
     }
     .cs-meta-key {
       font-family: var(--font-mono);
-      font-size: 0.58rem;
+      font-size: 0.68rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--muted);
@@ -255,7 +272,7 @@
     }
     .var-layer-head-label {
       font-family: var(--font-mono);
-      font-size: 0.58rem;
+      font-size: 0.68rem;
       letter-spacing: 0.25em;
       text-transform: uppercase;
       color: var(--muted);
@@ -320,7 +337,7 @@
     .token-val {
       font-family: var(--font-mono);
       font-size: 0.6rem;
-      color: rgba(245,245,240,0.3);
+      color: rgba(245,245,240,0.55);
     }
 
     /* Brand mode columns */
@@ -405,7 +422,7 @@
     }
     .comp-preview-label {
       font-family: var(--font-mono);
-      font-size: 0.58rem;
+      font-size: 0.68rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--muted);
@@ -625,7 +642,7 @@
     .layer-card:nth-child(3) { border-top-color: var(--cyan); }
     .layer-card-num {
       font-family: var(--font-mono);
-      font-size: 0.58rem;
+      font-size: 0.68rem;
       letter-spacing: 0.25em;
       text-transform: uppercase;
       color: var(--muted);
@@ -1049,29 +1066,28 @@
     <span class="footer-copy">Senior UX / UI Product Designer</span>
   </footer>
 
-  <script>
-    // Brand definitions
+    <script>
+    // Brand definitions — real brand colours
     const brands = {
-      a: { name: 'Brand A', primary: '#0A56E8', onPrimary: '#ffffff', subtle: 'rgba(10,86,232,0.12)', label: 'Blue / Corporate', btnText: '#ffffff' },
-      b: { name: 'Brand B', primary: '#CC1A1A', onPrimary: '#ffffff', subtle: 'rgba(204,26,26,0.12)', label: 'Red / Performance', btnText: '#ffffff' },
-      c: { name: 'Brand C', primary: '#0A0A0A', onPrimary: '#f5f5f0', subtle: 'rgba(10,10,10,0.08)', label: 'Black / Luxury', btnText: '#f5f5f0' },
-      d: { name: 'Brand D', primary: '#1B6B3A', onPrimary: '#ffffff', subtle: 'rgba(27,107,58,0.12)', label: 'Green / Mobility', btnText: '#ffffff' },
-      e: { name: 'Brand E', primary: '#7B2FBE', onPrimary: '#ffffff', subtle: 'rgba(123,47,190,0.12)', label: 'Plum / Innovation', btnText: '#ffffff' },
-      f: { name: 'Brand F', primary: '#B86C00', onPrimary: '#ffffff', subtle: 'rgba(184,108,0,0.12)', label: 'Amber / Heritage', btnText: '#ffffff' },
+      bmw:        { name: 'BMW',         primary: '#1C69D4', onPrimary: '#ffffff', subtle: 'rgba(28,105,212,0.12)',  label: 'Blue / Corporate',            prim: 'blue/500' },
+      mini:       { name: 'MINI',        primary: '#017EA4', onPrimary: '#ffffff', subtle: 'rgba(1,126,164,0.12)',   label: 'Teal / Urban',                prim: 'teal/600' },
+      motorrad:   { name: 'Motorrad',    primary: '#0062FF', onPrimary: '#ffffff', subtle: 'rgba(0,98,255,0.12)',    label: 'Electric Blue / Performance', prim: 'blue/400' },
+      rollsroyce: { name: 'Rolls-Royce', primary: '#6D30A7', onPrimary: '#ffffff', subtle: 'rgba(109,48,167,0.12)',  label: 'Purple / Luxury',             prim: 'purple/600' },
+      alpina:     { name: 'Alpina',      primary: '#177375', onPrimary: '#ffffff', subtle: 'rgba(23,115,117,0.12)',  label: 'Deep Teal / Craft',           prim: 'teal/700' },
+      alphabet:   { name: 'Alphabet',    primary: '#484EA0', onPrimary: '#ffffff', subtle: 'rgba(72,78,160,0.12)',   label: 'Indigo / Mobility',           prim: 'indigo/500' },
     };
 
     function swapBrand(key) {
       const b = brands[key];
 
-      // Update buttons
       document.querySelectorAll('.brand-btn').forEach(btn => {
         const isActive = btn.dataset.brand === key;
         btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
         btn.style.background = isActive ? b.primary : '';
         btn.style.color = isActive ? b.onPrimary : '';
       });
 
-      // Update components
       const btn = document.getElementById('demo-btn');
       btn.style.background = b.primary;
       btn.style.color = b.onPrimary;
@@ -1084,57 +1100,58 @@
       const progress = document.getElementById('demo-progress');
       progress.style.background = b.primary;
 
-      const nav1 = document.getElementById('demo-nav-1');
-      nav1.style.color = b.primary;
-      nav1.querySelector ? null : null;
       const navItems = document.querySelectorAll('.comp-nav-item');
       navItems[0].style.color = b.primary;
       navItems[1].style.color = 'var(--muted)';
       navItems[2].style.color = 'var(--muted)';
 
-      // Update token resolve panel
       const panel = document.getElementById('token-resolve-panel');
       panel.innerHTML = `
         <div class="comp-preview-label" style="margin-bottom:0.75rem;">Token Resolution · ${b.name}</div>
         <div class="resolve-row">
-          <span class="resolve-token-name">btn/background</span>
-          <div class="resolve-arrow"></div>
-          <span class="resolve-value"><div class="resolve-swatch" style="background:${b.primary};"></div>${b.primary}</span>
+          <span class="resolve-token-name">button/bg</span>
+          <span class="resolve-arrow"></span>
+          <span class="resolve-value"><span class="resolve-swatch" style="background:${b.primary}"></span> action/primary</span>
         </div>
         <div class="resolve-row">
-          <span class="resolve-token-name">btn/label</span>
-          <div class="resolve-arrow"></div>
-          <span class="resolve-value"><div class="resolve-swatch" style="background:${b.onPrimary}; border-color:rgba(255,255,255,0.15);"></div>${b.onPrimary}</span>
+          <span class="resolve-token-name">action/primary</span>
+          <span class="resolve-arrow"></span>
+          <span class="resolve-value"><span class="resolve-swatch" style="background:${b.primary}"></span> ${b.prim}</span>
+        </div>
+        <div class="resolve-row">
+          <span class="resolve-token-name">${b.prim}</span>
+          <span class="resolve-arrow"></span>
+          <span class="resolve-value"><span class="resolve-swatch" style="background:${b.primary}"></span> ${b.primary}</span>
         </div>
         <div class="resolve-row">
           <span class="resolve-token-name">badge/border</span>
-          <div class="resolve-arrow"></div>
-          <span class="resolve-value"><div class="resolve-swatch" style="background:${b.primary};"></div>${b.primary}</span>
+          <span class="resolve-arrow"></span>
+          <span class="resolve-value"><span class="resolve-swatch" style="background:${b.primary}"></span> action/primary</span>
         </div>
         <div class="resolve-row">
           <span class="resolve-token-name">progress/fill</span>
-          <div class="resolve-arrow"></div>
-          <span class="resolve-value"><div class="resolve-swatch" style="background:${b.primary};"></div>${b.primary}</span>
-        </div>
-        <div class="resolve-row">
-          <span class="resolve-token-name">nav/active-color</span>
-          <div class="resolve-arrow"></div>
-          <span class="resolve-value"><div class="resolve-swatch" style="background:${b.primary};"></div>${b.primary}</span>
+          <span class="resolve-arrow"></span>
+          <span class="resolve-value"><span class="resolve-swatch" style="background:${b.primary}"></span> action/primary</span>
         </div>
         <div style="margin-top:1rem; padding:0.75rem 1rem; background:rgba(0,255,179,0.04); border:1px solid rgba(0,255,179,0.15);">
-          <span style="font-family:var(--font-mono); font-size:0.62rem; color:rgba(0,255,179,0.6); letter-spacing:0.1em; text-transform:uppercase;">Mode: ${b.name} · ${b.label}</span>
+          <span style="font-family:var(--font-mono); font-size:0.6rem; color:var(--cyan); letter-spacing:0.1em;">MODE: ${b.name}</span><br>
+          <span style="font-family:var(--font-mono); font-size:0.58rem; color:var(--muted); letter-spacing:0.05em;">${b.label}</span>
         </div>
       `;
     }
 
-    // Initialise
-    swapBrand('a');
+    swapBrand('bmw');
 
-    // Scroll reveal
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    // Scroll reveal — respects reduced motion
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+    } else {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    }
   </script>
 </body>
 </html>
