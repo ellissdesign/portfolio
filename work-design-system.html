@@ -524,6 +524,10 @@
       align-items: center;
       justify-content: center;
     }
+    .comp-select-chevron {
+      flex-shrink: 0;
+      opacity: 0.65;
+    }
     .comp-select {
       display: flex;
       justify-content: space-between;
@@ -952,7 +956,10 @@
             </label>
             <div class="comp-field">
               <div class="comp-field-label">Label <span class="comp-field-info">i</span></div>
-              <div class="comp-select" id="demo-select"><span>Content</span><span>⌄</span></div>
+              <div class="comp-select" id="demo-select">
+                <span>Content</span>
+                <svg class="comp-select-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </div>              
               <div class="comp-field-helper">Helper text message</div>
             </div>
           </div>
