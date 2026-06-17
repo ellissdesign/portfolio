@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Galp Icon System &amp; Style Guide — Ellis Victoria</title>
+  <title>Marte Task Management Portal — Ellis Victoria</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -257,42 +257,6 @@
       align-items: start;
     }
 
-    /* ICON STYLE GRID */
-    .icon-styles-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      margin-top: 3rem;
-    }
-    .icon-style-card {
-      background: var(--black);
-      padding: 2.5rem 2rem;
-      text-align: center;
-    }
-    .icon-style-preview {
-      width: 64px;
-      height: 64px;
-      margin: 0 auto 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid var(--border);
-      font-size: 2rem;
-    }
-    .icon-style-name {
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-    .icon-style-desc {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      line-height: 1.7;
-      color: var(--muted);
-    }
-
     /* PROCESS STEPS */
     .process-grid {
       display: grid;
@@ -435,7 +399,6 @@
       .cs-two-col { grid-template-columns: 1fr; gap: 2rem; }
       .process-grid { grid-template-columns: 1fr; }
       .outcomes-grid { grid-template-columns: repeat(2, 1fr); }
-      .icon-styles-grid { grid-template-columns: repeat(2, 1fr); }
       .cs-foot-nav { flex-direction: column; gap: 1.5rem; padding: 3rem 1.5rem; }
     }
   </style>
@@ -455,10 +418,10 @@
     <div class="cs-hero-accent"></div>
 
     <div class="cs-hero-left">
-      <div class="cs-label">Case Study · 02</div>
+      <div class="cs-label">Case Study · 04</div>
       <h1 class="cs-title">
-        Galp Icon System<br>
-        <span>&amp; Style Guide</span>
+        Marte<br>
+        <span>Task Portal</span>
       </h1>
     </div>
 
@@ -474,19 +437,19 @@
         </div>
         <div class="cs-meta-cell">
           <div class="cs-meta-key">Client</div>
-          <div class="cs-meta-val">Galp</div>
+          <div class="cs-meta-val">Marte</div>
         </div>
         <div class="cs-meta-cell">
-          <div class="cs-meta-key">Scope</div>
-          <div class="cs-meta-val">Iconography + Style Guide</div>
+          <div class="cs-meta-key">Platform</div>
+          <div class="cs-meta-val">Web Portal (OutSystems)</div>
         </div>
       </div>
       <div class="cs-tags">
-        <span class="cs-tag">Iconography</span>
-        <span class="cs-tag">Style Guide</span>
-        <span class="cs-tag">Visual Language</span>
-        <span class="cs-tag">Component Unification</span>
-        <span class="cs-tag">Web + Mobile</span>
+        <span class="cs-tag">Task Management</span>
+        <span class="cs-tag">Web Portal</span>
+        <span class="cs-tag">Dashboard</span>
+        <span class="cs-tag">OutSystems</span>
+        <span class="cs-tag">Data Visualisation</span>
       </div>
     </div>
   </header>
@@ -497,63 +460,15 @@
       <div class="cs-label">Overview</div>
       <div class="cs-two-col">
         <div>
-          <h2 class="cs-section-title">Unifying a fragmented<br><em>visual language</em></h2>
+          <h2 class="cs-section-title">Clear task<br><em>management</em></h2>
           <div class="cs-prose">
-            <p>Galp's digital products — web apps and mobile apps — were using inconsistent icon and component styles. Different products had sourced icons from different libraries, resulting in a disjointed visual experience that undermined brand cohesion.</p>
-            <p>The challenge was analysing all components in use across the ecosystem and unifying them into one consistent system that could serve every product and platform.</p>
+            <p>Marte is a portal for analysing and managing tasks. The existing system was complex and difficult for workers to navigate — creating friction in daily operations and reducing productivity.</p>
+            <p>The challenge was transforming a cluttered, confusing interface into a clear, modern environment that workers could use and understand immediately without extensive training.</p>
           </div>
         </div>
         <div class="cs-prose" style="padding-top: 4.5rem;">
-          <p>I created a unified iconography system with four distinct styles and a comprehensive style guide. The guide documented construction rules, usage guidelines, and strict naming conventions — giving all teams a shared visual vocabulary.</p>
-          <p>The result brought visual consistency across Galp's web and mobile products, eliminated duplicate or conflicting icons, and provided a scalable foundation for future growth.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ICON STYLES -->
-    <section class="cs-section reveal">
-      <div class="cs-label">Icon Styles</div>
-      <h2 class="cs-section-title">Four Styles,<br><em>One System</em></h2>
-      <div class="cs-prose">
-        <p>Each icon style was designed for a specific context. The system provides clear guidance on when to use each style, ensuring consistent application across products and platforms.</p>
-      </div>
-
-      <div class="icon-styles-grid">
-        <div class="icon-style-card">
-          <div class="icon-style-preview">☐</div>
-          <div class="icon-style-name">Outline</div>
-          <div class="icon-style-desc">Clean line icons for navigation, toolbars, and compact UI. Optimised for small sizes with consistent 1.5px stroke weight.</div>
-        </div>
-        <div class="icon-style-card">
-          <div class="icon-style-preview">◼</div>
-          <div class="icon-style-name">Filled</div>
-          <div class="icon-style-desc">Solid icons for active states, emphasis, and high-density interfaces. Strong visual weight for selected or highlighted elements.</div>
-        </div>
-        <div class="icon-style-card">
-          <div class="icon-style-preview">◧</div>
-          <div class="icon-style-name">Duotone</div>
-          <div class="icon-style-desc">Two-tone icons for marketing materials and feature highlights. Combines line and fill for visual richness at larger sizes.</div>
-        </div>
-        <div class="icon-style-card">
-          <div class="icon-style-preview">▣</div>
-          <div class="icon-style-name">Flat</div>
-          <div class="icon-style-desc">Simplified flat icons for illustrations, onboarding, and decorative contexts. Minimal detail for maximum clarity at scale.</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONSTRUCTION -->
-    <section class="cs-section reveal">
-      <div class="cs-label">Construction</div>
-      <h2 class="cs-section-title">Grid &amp; Rules</h2>
-      <div class="cs-two-col">
-        <div class="cs-prose">
-          <p>All icons are constructed on a 24×24px grid with a 2px safe zone. Key shapes — circles, squares, rectangles — are optically corrected to appear visually consistent rather than mathematically identical.</p>
-          <p>Stroke width is fixed at 1.5px for outline icons. Corner radii follow a consistent 1px rule for inner corners and 2px for outer corners, creating a subtle but uniform roundness across the set.</p>
-        </div>
-        <div class="cs-prose">
-          <p>Each icon follows strict alignment rules: centred within the grid, optically balanced, and tested at both 16px and 24px to ensure readability at all target sizes.</p>
-          <p>The construction guidelines document covers every rule — from minimum line gaps to angle standardisation — ensuring that any designer contributing to the library produces icons that feel native to the system.</p>
+          <p>I designed a clean, structured web portal that simplified task workflows and made information hierarchy immediately apparent. The interface prioritises clarity over density — every element earns its place on screen.</p>
+          <p>Using OutSystems patterns as the component foundation ensured consistency with existing internal tools while introducing a significantly improved user experience.</p>
         </div>
       </div>
     </section>
@@ -561,27 +476,27 @@
     <!-- DELIVERABLES SHOWCASE -->
     <section class="cs-section reveal">
       <div class="cs-label">Deliverables</div>
-      <h2 class="cs-section-title">Key Screens &amp;<br><em>Deliverables</em></h2>
+      <h2 class="cs-section-title">Key Screens &amp;<br><em>Interfaces</em></h2>
       <div class="cs-prose">
-        <p>A selection of key deliverables from the project — icon sheets, style guide pages, and the unified component library.</p>
+        <p>Key screens from the task management portal — dashboard overview, task lists, detail views, and analytics.</p>
       </div>
-      <div class="showcase-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border); margin-top:3rem;">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border); margin-top:3rem;">
         <div style="background:var(--mid); aspect-ratio:4/3; display:flex; align-items:center; justify-content:center; padding:2rem;">
           <!-- Replace src with actual image path -->
-          <img src="" alt="Galp icon grid — full set overview" style="width:100%; height:100%; object-fit:cover; display:none;">
-          <span style="font-family:var(--font-mono); font-size:0.65rem; color:var(--muted); letter-spacing:0.1em; text-transform:uppercase;">Icon Grid Overview</span>
+          <img src="" alt="Marte task dashboard overview" style="width:100%; height:100%; object-fit:cover; display:none;">
+          <span style="font-family:var(--font-mono); font-size:0.65rem; color:var(--muted); letter-spacing:0.1em; text-transform:uppercase;">Dashboard</span>
         </div>
         <div style="background:var(--mid); aspect-ratio:4/3; display:flex; align-items:center; justify-content:center; padding:2rem;">
-          <img src="" alt="Galp icon styles — outline, filled, duotone, flat" style="width:100%; height:100%; object-fit:cover; display:none;">
-          <span style="font-family:var(--font-mono); font-size:0.65rem; color:var(--muted); letter-spacing:0.1em; text-transform:uppercase;">Style Variants</span>
+          <img src="" alt="Marte task list view" style="width:100%; height:100%; object-fit:cover; display:none;">
+          <span style="font-family:var(--font-mono); font-size:0.65rem; color:var(--muted); letter-spacing:0.1em; text-transform:uppercase;">Task List</span>
         </div>
         <div style="background:var(--mid); aspect-ratio:4/3; display:flex; align-items:center; justify-content:center; padding:2rem;">
-          <img src="" alt="Galp icon construction grid and rules" style="width:100%; height:100%; object-fit:cover; display:none;">
-          <span style="font-family:var(--font-mono); font-size:0.65rem; color:var(--muted); letter-spacing:0.1em; text-transform:uppercase;">Construction Rules</span>
+          <img src="" alt="Marte task detail view" style="width:100%; height:100%; object-fit:cover; display:none;">
+          <span style="font-family:var(--font-mono); font-size:0.65rem; color:var(--muted); letter-spacing:0.1em; text-transform:uppercase;">Task Detail</span>
         </div>
         <div style="background:var(--mid); aspect-ratio:4/3; display:flex; align-items:center; justify-content:center; padding:2rem;">
-          <img src="" alt="Galp style guide documentation pages" style="width:100%; height:100%; object-fit:cover; display:none;">
-          <span style="font-family:var(--font-mono); font-size:0.65rem; color:var(--muted); letter-spacing:0.1em; text-transform:uppercase;">Style Guide Pages</span>
+          <img src="" alt="Marte analytics and reporting" style="width:100%; height:100%; object-fit:cover; display:none;">
+          <span style="font-family:var(--font-mono); font-size:0.65rem; color:var(--muted); letter-spacing:0.1em; text-transform:uppercase;">Analytics</span>
         </div>
       </div>
     </section>
@@ -594,38 +509,38 @@
         <div class="process-step">
           <div class="process-accent"></div>
           <div class="process-num">01</div>
-          <div class="process-step-title">Audit &amp; Inventory</div>
-          <div class="process-step-desc">Audited all existing icons across Galp's digital products. Identified inconsistencies in style, sizing, and stroke weight. Catalogued the full icon needs for all platforms.</div>
+          <div class="process-step-title">Research</div>
+          <div class="process-step-desc">Interviewed workers and mapped existing task workflows. Identified the key pain points — information overload, unclear hierarchy, and too many steps to complete common actions.</div>
         </div>
         <div class="process-step">
           <div class="process-accent"></div>
           <div class="process-num">02</div>
-          <div class="process-step-title">Grid &amp; Principles</div>
-          <div class="process-step-desc">Established the construction grid, stroke rules, corner radii, and optical correction principles. Defined the four style variants and their appropriate usage contexts.</div>
+          <div class="process-step-title">Information Architecture</div>
+          <div class="process-step-desc">Restructured the task hierarchy and navigation. Designed a clear mental model — tasks, projects, and analytics — with logical groupings and progressive disclosure.</div>
         </div>
         <div class="process-step">
           <div class="process-accent"></div>
           <div class="process-num">03</div>
-          <div class="process-step-title">Core Set Design</div>
-          <div class="process-step-desc">Designed the initial set of 200+ icons across all four styles. Each icon was tested at multiple sizes and across light and dark backgrounds for readability.</div>
+          <div class="process-step-title">UI Design</div>
+          <div class="process-step-desc">Created a clean, modern dashboard and task views using OutSystems patterns. Focused on whitespace, clear typography, and visual hierarchy to reduce cognitive load.</div>
         </div>
         <div class="process-step">
           <div class="process-accent"></div>
           <div class="process-num">04</div>
-          <div class="process-step-title">Naming &amp; Organisation</div>
-          <div class="process-step-desc">Created a systematic naming convention and category structure. Icons are grouped by function — navigation, actions, objects, status — for easy discoverability.</div>
+          <div class="process-step-title">Component Design</div>
+          <div class="process-step-desc">Designed reusable UI components — task cards, status filters, priority badges, and data tables — all built on OutSystems patterns for development efficiency.</div>
         </div>
         <div class="process-step">
           <div class="process-accent"></div>
           <div class="process-num">05</div>
-          <div class="process-step-title">Usage Guidelines</div>
-          <div class="process-step-desc">Documented comprehensive usage guidelines including sizing rules, spacing recommendations, colour application, and do's and don'ts for each style variant.</div>
+          <div class="process-step-title">Prototyping</div>
+          <div class="process-step-desc">Built interactive prototypes for the key task management flows — creating, assigning, tracking, and completing tasks — and validated with stakeholder walkthroughs.</div>
         </div>
         <div class="process-step">
           <div class="process-accent"></div>
           <div class="process-num">06</div>
-          <div class="process-step-title">Handoff &amp; Integration</div>
-          <div class="process-step-desc">Delivered as SVG exports, Figma component library, and developer-ready icon font. Integrated directly into Galp's existing OutSystems design system.</div>
+          <div class="process-step-title">Delivery</div>
+          <div class="process-step-desc">Delivered Sketch files with complete component specs aligned to OutSystems patterns. Included guidelines for data density, empty states, and responsive behaviour.</div>
         </div>
       </div>
     </section>
@@ -636,35 +551,35 @@
       <h2 class="cs-section-title">What Was Delivered</h2>
       <div class="outcomes-grid">
         <div class="outcome-cell">
-          <div class="outcome-num">200+</div>
-          <div class="outcome-label">Icons<br>designed</div>
-        </div>
-        <div class="outcome-cell">
-          <div class="outcome-num">4</div>
-          <div class="outcome-label">Style<br>variants</div>
-        </div>
-        <div class="outcome-cell">
           <div class="outcome-num">1</div>
-          <div class="outcome-label">Unified<br>system</div>
+          <div class="outcome-label">Web<br>Portal</div>
         </div>
         <div class="outcome-cell">
-          <div class="outcome-num">3</div>
-          <div class="outcome-label">Export<br>formats</div>
+          <div class="outcome-num">✓</div>
+          <div class="outcome-label">Task<br>Dashboard</div>
+        </div>
+        <div class="outcome-cell">
+          <div class="outcome-num">✓</div>
+          <div class="outcome-label">Clear<br>UX</div>
+        </div>
+        <div class="outcome-cell">
+          <div class="outcome-num">OS</div>
+          <div class="outcome-label">OutSystems<br>Patterns</div>
         </div>
       </div>
       <div class="cs-prose" style="margin-top:3rem; max-width:none;">
-        <p>The icon system replaced a fragmented collection of inconsistent icons sourced from multiple libraries. By creating a bespoke set tailored to Galp's specific product needs, the system improved visual coherence, reduced design debt, and gave developers a reliable, well-documented resource they could trust.</p>
+        <p>The redesigned Marte portal transformed a complex, confusing tool into a clear working environment. Workers could immediately find, analyse, and manage their tasks without friction. The modern interface reduced the learning curve and improved daily productivity across teams.</p>
       </div>
 
       <div style="margin-top:2.5rem;">
         <div class="cs-label" style="margin-bottom:1.5rem;">Tools &amp; Methods</div>
         <div class="tools-row">
           <span class="tool-chip">Sketch</span>
-          <span class="tool-chip">Adobe Illustrator</span>
-          <span class="tool-chip">SVG Optimisation</span>
-          <span class="tool-chip">Icon Font</span>
-          <span class="tool-chip">Style Guide</span>
-          <span class="tool-chip">Component Unification</span>
+          <span class="tool-chip">OutSystems Patterns</span>
+          <span class="tool-chip">Dashboard Design</span>
+          <span class="tool-chip">Information Architecture</span>
+          <span class="tool-chip">Data Visualisation</span>
+          <span class="tool-chip">Prototyping</span>
         </div>
       </div>
     </section>
