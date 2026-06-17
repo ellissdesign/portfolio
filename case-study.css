@@ -2,7 +2,7 @@
    case-study.css — shared base styles for all work-*.html case-study pages
    Page-specific CSS stays inline in each page:
      - work-galp.html         → .icon-styles-grid
-     - work-design-system.html → brand demo + swapBrand() JS + .brand-* / .comp-* / .var-* / .layer-* / .token-* / .cs-nda
+     - work-design-system.html → brand demo + swapBrand() JS + .brand-* / .comp-* / .var-* / .layer-* / .token-*
    ========================================================================== */
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
