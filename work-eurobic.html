@@ -7,401 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --black: #0a0a0a;
-      --white: #f5f5f0;
-      --cyan: #00ffb3;
-      --blue: #2440ee;
-      --mid: #1a1a1a;
-      --muted: #9a9a92;
-      --border: rgba(245,245,240,0.12);
-      --font-display: 'Syne', sans-serif;
-      --font-mono: 'Space Mono', monospace;
-    }
-
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--black);
-      color: var(--white);
-      font-family: var(--font-display);
-      overflow-x: hidden;
-      cursor: default;
-    }
-    a { color: inherit; text-decoration: none; }
-    a, button, [role="button"] { cursor: pointer; }
-
-    /* Visible keyboard focus (WCAG 2.4.7) */
-    :focus-visible {
-      outline: 2px solid var(--cyan);
-      outline-offset: 3px;
-    }
-
-    /* Skip link (WCAG 2.4.1) */
-    .skip-link {
-      position: absolute;
-      left: 1rem;
-      top: -3.5rem;
-      z-index: 200;
-      background: var(--cyan);
-      color: var(--black);
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 0.6rem 1rem;
-      transition: top 0.2s;
-    }
-    .skip-link:focus { top: 1rem; }
-
-    /* Respect reduced motion (WCAG 2.3.3) */
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
-      *, *::before, *::after {
-        transition-duration: 0.01ms !important;
-        animation-duration: 0.01ms !important;
-      }
-    }
-
-    /* NAV */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.25rem 3rem;
-      border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(20px);
-      background: rgba(10,10,10,0.85);
-    }
-    .nav-logo {
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      letter-spacing: 0.2em;
-      color: var(--cyan);
-      text-transform: uppercase;
-    }
-    .nav-back {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--muted);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: color 0.2s;
-    }
-    .nav-back:hover { color: var(--cyan); }
-    .nav-back::before { content: '←'; }
-
-    /* HERO */
-    .cs-hero {
-      min-height: 60vh;
-      padding: 10rem 3rem 6rem;
-      position: relative;
-      overflow: hidden;
-      border-bottom: 1px solid var(--border);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: end;
-    }
-    .cs-hero-bg {
-      position: absolute;
-      inset: 0;
-      background:
-        repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(245,245,240,0.02) 40px, rgba(245,245,240,0.02) 41px),
-        repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(245,245,240,0.02) 40px, rgba(245,245,240,0.02) 41px);
-      pointer-events: none;
-    }
-    .cs-hero-accent {
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--cyan) 0%, transparent 60%);
-    }
-    .cs-label {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--cyan);
-      margin-bottom: 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    .cs-label::before {
-      content: '';
-      display: inline-block;
-      width: 1.5rem;
-      height: 1px;
-      background: var(--cyan);
-    }
-    .cs-title {
-      font-size: clamp(2.5rem, 5vw, 5rem);
-      font-weight: 800;
-      line-height: 0.95;
-      letter-spacing: -0.03em;
-      margin-bottom: 2rem;
-    }
-    .cs-title span {
-      display: block;
-      color: rgba(245,245,240,0.10);
-      -webkit-text-stroke: 1px var(--white);
-    }
-    .cs-hero-right {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-      padding-bottom: 0.5rem;
-    }
-    .cs-meta-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-    }
-    .cs-meta-cell {
-      background: var(--black);
-      padding: 1.25rem;
-    }
-    .cs-meta-key {
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.4rem;
-    }
-    .cs-meta-val {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--white);
-    }
-    .cs-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-    .cs-tag {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      padding: 0.3rem 0.7rem;
-      background: rgba(0,255,179,0.07);
-      border: 1px solid rgba(0,255,179,0.2);
-      color: var(--cyan);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    /* BODY SECTIONS */
-    .cs-body {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .cs-section {
-      padding: 6rem 3rem;
-      border-bottom: 1px solid var(--border);
-    }
-    .cs-section-label {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--cyan);
-      margin-bottom: 2.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    .cs-section-label::before {
-      content: '';
-      display: inline-block;
-      width: 1.5rem;
-      height: 1px;
-      background: var(--cyan);
-    }
-    .cs-section-title {
-      font-size: clamp(1.8rem, 3vw, 2.5rem);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      line-height: 1;
-      margin-bottom: 2.5rem;
-    }
-    .cs-section-title em {
-      font-style: normal;
-      color: rgba(245,245,240,0.10);
-      -webkit-text-stroke: 1px var(--white);
-    }
-    .cs-prose {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.95rem;
-      line-height: 1.7;
-      color: rgba(245,245,240,0.82);
-      max-width: 66ch;
-      letter-spacing: 0.01em;
-    }
-    .cs-prose p + p { margin-top: 1.5em; }
-    .cs-two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: start;
-    }
-
-    /* PROCESS STEPS */
-    .process-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      margin-top: 3rem;
-    }
-    .process-step {
-      background: var(--black);
-      padding: 2.5rem 2rem;
-      position: relative;
-    }
-    .process-num {
-      font-family: var(--font-display);
-      font-size: 4rem;
-      font-weight: 800;
-      color: transparent;
-      -webkit-text-stroke: 1px rgba(245,245,240,0.06);
-      line-height: 1;
-      margin-bottom: 1rem;
-    }
-    .process-step-title {
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 0.75rem;
-    }
-    .process-step-desc {
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      line-height: 1.75;
-      color: var(--muted);
-    }
-    .process-accent {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, var(--cyan) 0%, transparent 60%);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.4s ease;
-    }
-    .process-step:hover .process-accent { transform: scaleX(1); }
-
-    /* OUTCOMES */
-    .outcomes-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      margin-top: 3rem;
-    }
-    .outcome-cell {
-      background: var(--black);
-      padding: 2rem;
-      text-align: center;
-    }
-    .outcome-num {
-      font-family: var(--font-display);
-      font-size: 2.5rem;
-      font-weight: 800;
-      color: var(--cyan);
-      line-height: 1;
-      margin-bottom: 0.5rem;
-    }
-    .outcome-label {
-      font-family: var(--font-mono);
-      font-size: 0.62rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    /* TOOLS */
-    .tools-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      margin-top: 2rem;
-    }
-    .tool-chip {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 0.5rem 1rem;
-      border: 1px solid var(--border);
-      color: var(--muted);
-    }
-
-    /* FOOTER NAV */
-    .cs-foot-nav {
-      padding: 4rem 3rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .cs-foot-back {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: color 0.2s;
-    }
-    .cs-foot-back:hover { color: var(--cyan); }
-    .cs-foot-back::before { content: '← '; }
-    footer {
-      padding: 2rem 3rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-top: 1px solid var(--border);
-    }
-    .footer-copy {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      color: var(--muted);
-      letter-spacing: 0.1em;
-    }
-
-    /* REVEAL */
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    @media (max-width: 900px) {
-      nav { padding: 1rem 1.5rem; }
-      .cs-hero { grid-template-columns: 1fr; padding: 8rem 1.5rem 4rem; }
-      .cs-section { padding: 4rem 1.5rem; }
-      .cs-two-col { grid-template-columns: 1fr; gap: 2rem; }
-      .process-grid { grid-template-columns: 1fr; }
-      .outcomes-grid { grid-template-columns: repeat(2, 1fr); }
-      .cs-foot-nav { flex-direction: column; gap: 1.5rem; padding: 3rem 1.5rem; }
-    }
-  </style>
+  <link rel="stylesheet" href="case-study.css">
 </head>
 <body>
   <a href="#main" class="skip-link">Skip to content</a>
@@ -462,13 +68,112 @@
         <div>
           <h2 class="cs-section-title">Modern banking<br><em>for all ages</em></h2>
           <div class="cs-prose">
-            <p>Eurobic needed a modern, clean homebanking experience that could be used easily by clients of all ages — from digital-native millennials to older customers less comfortable with technology.</p>
-            <p>The challenge was redesigning both the web and mobile applications with a fresh, contemporary aesthetic while keeping the interface intuitive and accessible to every demographic.</p>
+            <p>The brief was simple to state and hard to do: <em>create a modern, clean design with more useful functions for Eurobic clients and workers</em>. The homebanking and mobile app had to bring a different ambient — contemporary and approachable — while staying easy to use for people of all ages.</p>
+            <p>That meant redesigning both the web and mobile applications with a fresh aesthetic without sacrificing the legibility and predictability that less technical users depend on.</p>
           </div>
         </div>
         <div class="cs-prose" style="padding-top: 4.5rem;">
           <p>The redesign introduced a cleaner visual language, simplified navigation, and more useful functions for both clients and bank workers. Using OutSystems patterns as the foundation ensured consistency and development efficiency.</p>
           <p>The result was a homebanking experience with a different ambient — modern, approachable, and designed to serve users regardless of their age or technical literacy.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROBLEM & GOALS -->
+    <section class="cs-section reveal">
+      <div class="cs-label">Problem &amp; Goals</div>
+      <h2 class="cs-section-title">One product,<br><em>every kind of user</em></h2>
+      <div class="cs-two-col">
+        <div class="cs-prose">
+          <p>Eurobic's existing homebanking felt dated and uneven. Younger, digital-native customers expected the speed and clarity of modern apps, while older customers — less comfortable with technology — were easily lost in dense screens and unclear navigation. The same interface had to work for both, and for the bank workers using it daily.</p>
+          <p>A redesign couldn't simply chase a trend. It had to modernise the look and feel without trading away the legibility and predictability that less technical users depend on.</p>
+        </div>
+        <div class="cs-prose">
+          <p>The goals were focused:</p>
+          <p><strong>Modernise</strong> the visual language across web and mobile.<br>
+          <strong>Simplify</strong> navigation and reduce cognitive load on key tasks.<br>
+          <strong>Include</strong> every age group through accessible, predictable patterns.<br>
+          <strong>Add value</strong> for bank workers with more useful, efficient functions.</p>
+          <p>Built on OutSystems patterns to keep delivery consistent and efficient.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESEARCH & DISCOVERY -->
+    <section class="cs-section reveal">
+      <div class="cs-label">Research &amp; Discovery</div>
+      <h2 class="cs-section-title">Understanding<br><em>who banks here</em></h2>
+      <div class="cs-two-col">
+        <div>
+          <h3 style="font-family:var(--font-mono); font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:1.25rem;">Flows &amp; pain points</h3>
+          <div class="cs-prose">
+            <p>I studied the existing user flows and mapped where people stalled — the friction points that slowed older users down and the inefficiencies that cost bank workers time. Seeing the current journeys end to end made the priorities obvious.</p>
+          </div>
+        </div>
+        <div>
+          <h3 style="font-family:var(--font-mono); font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:1.25rem;">Demographics</h3>
+          <div class="cs-prose">
+            <p>The user base spanned a wide range of ages and confidence levels. That spread — not an average user, but a full spectrum — became the design constraint that everything else had to answer to.</p>
+          </div>
+        </div>
+      </div>
+      <div class="cs-prose" style="margin-top:2.5rem; max-width:none;">
+        <p>Discovery reframed the brief from “make it look modern” to “make it modern <em>and</em> usable by everyone.” That distinction drove the simplified navigation, clearer hierarchy, and generous spacing that followed.</p>
+      </div>
+    </section>
+
+    <!-- DESIGN DECISIONS -->
+    <section class="cs-section reveal">
+      <div class="cs-label">Design Decisions</div>
+      <h2 class="cs-section-title">Decisions &amp;<br><em>rationale</em></h2>
+      <div class="cs-prose">
+        <p>Each decision balanced a modern aesthetic against the needs of the least confident user. A few choices shaped the rest.</p>
+      </div>
+      <div class="cs-two-col" style="margin-top:2.5rem;">
+        <div class="cs-prose">
+          <p><strong>Clarity over density.</strong> Generous whitespace and clear typography keep each screen scannable. For older users this reduces overwhelm; for everyone it makes the primary action obvious.</p>
+          <p><strong>Simplified navigation.</strong> Related functions were grouped and the structure flattened, so common tasks take fewer steps and fewer decisions.</p>
+        </div>
+        <div class="cs-prose">
+          <p><strong>OutSystems as the foundation.</strong> Building on established component patterns kept the experience consistent and made development efficient — design and delivery speaking the same language.</p>
+          <p><strong>Accessible by default.</strong> Predictable layouts, strong contrast, and consistent patterns meant accessibility was built into the system rather than bolted on at the end.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BRAND & STYLE GUIDE -->
+    <section class="cs-section reveal">
+      <div class="cs-label">Brand &amp; Style Guide</div>
+      <h2 class="cs-section-title">A documented<br><em>visual language</em></h2>
+      <div class="cs-two-col">
+        <div class="cs-prose">
+          <p>The redesign was backed by a style guide so the look and feel stayed consistent across web, mobile, and every team touching the product.</p>
+          <p><strong>Typeface — Montserrat.</strong> A modern, characterful typeface used in Semibold for emphasis and Regular for body, chosen to give the app more personality while staying highly legible.</p>
+        </div>
+        <div>
+          <h3 style="font-family:var(--font-mono); font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:1.5rem;">Colour palette</h3>
+          <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:1px; background:var(--border); border:1px solid var(--border);">
+            <div style="background:var(--black); padding:1.25rem 1rem; text-align:center;">
+              <div style="width:100%; aspect-ratio:1; background:#CD0809; border-radius:50%; margin-bottom:1rem;"></div>
+              <div style="font-size:0.8rem; font-weight:600; margin-bottom:0.25rem;">Primary</div>
+              <div style="font-family:var(--font-mono); font-size:0.65rem; color:var(--muted);">#CD0809</div>
+            </div>
+            <div style="background:var(--black); padding:1.25rem 1rem; text-align:center;">
+              <div style="width:100%; aspect-ratio:1; background:#B51D23; border-radius:50%; margin-bottom:1rem;"></div>
+              <div style="font-size:0.8rem; font-weight:600; margin-bottom:0.25rem;">Secondary</div>
+              <div style="font-family:var(--font-mono); font-size:0.65rem; color:var(--muted);">#B51D23</div>
+            </div>
+            <div style="background:var(--black); padding:1.25rem 1rem; text-align:center;">
+              <div style="width:100%; aspect-ratio:1; background:#353535; border-radius:50%; margin-bottom:1rem; border:1px solid var(--border);"></div>
+              <div style="font-size:0.8rem; font-weight:600; margin-bottom:0.25rem;">Text</div>
+              <div style="font-family:var(--font-mono); font-size:0.65rem; color:var(--muted);">#353535</div>
+            </div>
+            <div style="background:var(--black); padding:1.25rem 1rem; text-align:center;">
+              <div style="width:100%; aspect-ratio:1; background:#8F9AA3; border-radius:50%; margin-bottom:1rem;"></div>
+              <div style="font-size:0.8rem; font-weight:600; margin-bottom:0.25rem;">Label</div>
+              <div style="font-family:var(--font-mono); font-size:0.65rem; color:var(--muted);">#8F9AA3</div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -575,11 +280,31 @@
         <div class="cs-label" style="margin-bottom:1.5rem;">Tools &amp; Methods</div>
         <div class="tools-row">
           <span class="tool-chip">Sketch</span>
+          <span class="tool-chip">Adobe Illustrator</span>
           <span class="tool-chip">OutSystems Patterns</span>
+          <span class="tool-chip">Montserrat</span>
           <span class="tool-chip">Responsive Design</span>
-          <span class="tool-chip">User Flows</span>
           <span class="tool-chip">Wireframing</span>
           <span class="tool-chip">Prototyping</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- MY ROLE -->
+    <section class="cs-section reveal" style="background:var(--mid); border-top:1px solid var(--border);">
+      <div class="cs-label">My Role</div>
+      <div class="cs-two-col">
+        <div>
+          <h2 class="cs-section-title">Role &amp;<br><em>responsibilities</em></h2>
+          <div class="cs-prose">
+            <p>I worked as the designer on the homebanking redesign, responsible for the experience across web and mobile — from research through to a documented handoff built on OutSystems patterns.</p>
+          </div>
+        </div>
+        <div class="cs-prose" style="padding-top:4.5rem;">
+          <p><strong>Research</strong> — studied existing flows, demographics, and pain points to set the design priorities.</p>
+          <p><strong>Architecture</strong> — mapped user journeys and simplified the navigation structure.</p>
+          <p><strong>Design</strong> — produced wireframes and high-fidelity UI for the key flows across both platforms.</p>
+          <p><strong>Prototyping &amp; handoff</strong> — built interactive prototypes and delivered specs aligned to OutSystems components, including responsive behaviour and edge cases.</p>
         </div>
       </div>
     </section>

@@ -7,256 +7,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="case-study.css">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --black: #0a0a0a;
-      --white: #f5f5f0;
-      --cyan: #00ffb3;
-      --blue: #2440ee;
-      --mid: #1a1a1a;
-      --muted: #9a9a92;
-      --border: rgba(245,245,240,0.12);
-      --font-display: 'Syne', sans-serif;
-      --font-mono: 'Space Mono', monospace;
-    }
-
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--black);
-      color: var(--white);
-      font-family: var(--font-display);
-      overflow-x: hidden;
-      cursor: default;
-    }
-    a { color: inherit; text-decoration: none; }
-    a, button, [role="button"] { cursor: pointer; }
-
-    /* Visible keyboard focus (WCAG 2.4.7) */
-    :focus-visible {
-      outline: 2px solid var(--cyan);
-      outline-offset: 3px;
-    }
-
-    /* Skip link (WCAG 2.4.1) */
-    .skip-link {
-      position: absolute;
-      left: 1rem;
-      top: -3.5rem;
-      z-index: 200;
-      background: var(--cyan);
-      color: var(--black);
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 0.6rem 1rem;
-      transition: top 0.2s;
-    }
-    .skip-link:focus { top: 1rem; }
-
-    /* Respect reduced motion (WCAG 2.3.3) */
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
-      *, *::before, *::after {
-        transition-duration: 0.01ms !important;
-        animation-duration: 0.01ms !important;
-      }
-    }
-
-    /* NAV */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.25rem 3rem;
-      border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(20px);
-      background: rgba(10,10,10,0.85);
-    }
-    .nav-logo {
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      letter-spacing: 0.2em;
-      color: var(--cyan);
-      text-transform: uppercase;
-    }
-    .nav-back {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--muted);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: color 0.2s;
-    }
-    .nav-back:hover { color: var(--cyan); }
-    .nav-back::before { content: '←'; }
-
-    /* HERO */
-    .cs-hero {
-      min-height: 60vh;
-      padding: 10rem 3rem 6rem;
-      position: relative;
-      overflow: hidden;
-      border-bottom: 1px solid var(--border);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: end;
-    }
-    .cs-hero-bg {
-      position: absolute;
-      inset: 0;
-      background:
-        repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(245,245,240,0.02) 40px, rgba(245,245,240,0.02) 41px),
-        repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(245,245,240,0.02) 40px, rgba(245,245,240,0.02) 41px);
-      pointer-events: none;
-    }
-    .cs-hero-accent {
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--cyan) 0%, transparent 60%);
-    }
-    .cs-label {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--cyan);
-      margin-bottom: 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    .cs-label::before {
-      content: '';
-      display: inline-block;
-      width: 1.5rem;
-      height: 1px;
-      background: var(--cyan);
-    }
-    .cs-title {
-      font-size: clamp(2.5rem, 5vw, 5rem);
-      font-weight: 800;
-      line-height: 0.95;
-      letter-spacing: -0.03em;
-      margin-bottom: 2rem;
-    }
-    .cs-title span {
-      display: block;
-      color: rgba(245,245,240,0.10);
-      -webkit-text-stroke: 1px var(--white);
-    }
-    .cs-hero-right {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-      padding-bottom: 0.5rem;
-    }
-    .cs-meta-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-    }
-    .cs-meta-cell {
-      background: var(--black);
-      padding: 1.25rem;
-    }
-    .cs-meta-key {
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.4rem;
-    }
-    .cs-meta-val {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--white);
-    }
-    .cs-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-    .cs-tag {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      padding: 0.3rem 0.7rem;
-      background: rgba(0,255,179,0.07);
-      border: 1px solid rgba(0,255,179,0.2);
-      color: var(--cyan);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    /* BODY SECTIONS */
-    .cs-body {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .cs-section {
-      padding: 6rem 3rem;
-      border-bottom: 1px solid var(--border);
-    }
-    .cs-section-label {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--cyan);
-      margin-bottom: 2.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    .cs-section-label::before {
-      content: '';
-      display: inline-block;
-      width: 1.5rem;
-      height: 1px;
-      background: var(--cyan);
-    }
-    .cs-section-title {
-      font-size: clamp(1.8rem, 3vw, 2.5rem);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      line-height: 1;
-      margin-bottom: 2.5rem;
-    }
-    .cs-section-title em {
-      font-style: normal;
-      color: rgba(245,245,240,0.10);
-      -webkit-text-stroke: 1px var(--white);
-    }
-    .cs-prose {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.95rem;
-      line-height: 1.7;
-      color: rgba(245,245,240,0.82);
-      max-width: 66ch;
-      letter-spacing: 0.01em;
-    }
-    .cs-prose p + p { margin-top: 1.5em; }
-    .cs-two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: start;
-    }
-
     /* ICON STYLE GRID */
     .icon-styles-grid {
       display: grid;
@@ -293,150 +45,8 @@
       color: var(--muted);
     }
 
-    /* PROCESS STEPS */
-    .process-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      margin-top: 3rem;
-    }
-    .process-step {
-      background: var(--black);
-      padding: 2.5rem 2rem;
-      position: relative;
-    }
-    .process-num {
-      font-family: var(--font-display);
-      font-size: 4rem;
-      font-weight: 800;
-      color: transparent;
-      -webkit-text-stroke: 1px rgba(245,245,240,0.06);
-      line-height: 1;
-      margin-bottom: 1rem;
-    }
-    .process-step-title {
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 0.75rem;
-    }
-    .process-step-desc {
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      line-height: 1.75;
-      color: var(--muted);
-    }
-    .process-accent {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, var(--cyan) 0%, transparent 60%);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.4s ease;
-    }
-    .process-step:hover .process-accent { transform: scaleX(1); }
-
-    /* OUTCOMES */
-    .outcomes-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      margin-top: 3rem;
-    }
-    .outcome-cell {
-      background: var(--black);
-      padding: 2rem;
-      text-align: center;
-    }
-    .outcome-num {
-      font-family: var(--font-display);
-      font-size: 2.5rem;
-      font-weight: 800;
-      color: var(--cyan);
-      line-height: 1;
-      margin-bottom: 0.5rem;
-    }
-    .outcome-label {
-      font-family: var(--font-mono);
-      font-size: 0.62rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    /* TOOLS */
-    .tools-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      margin-top: 2rem;
-    }
-    .tool-chip {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 0.5rem 1rem;
-      border: 1px solid var(--border);
-      color: var(--muted);
-    }
-
-    /* FOOTER NAV */
-    .cs-foot-nav {
-      padding: 4rem 3rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .cs-foot-back {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: color 0.2s;
-    }
-    .cs-foot-back:hover { color: var(--cyan); }
-    .cs-foot-back::before { content: '← '; }
-    footer {
-      padding: 2rem 3rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-top: 1px solid var(--border);
-    }
-    .footer-copy {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      color: var(--muted);
-      letter-spacing: 0.1em;
-    }
-
-    /* REVEAL */
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-
     @media (max-width: 900px) {
-      nav { padding: 1rem 1.5rem; }
-      .cs-hero { grid-template-columns: 1fr; padding: 8rem 1.5rem 4rem; }
-      .cs-section { padding: 4rem 1.5rem; }
-      .cs-two-col { grid-template-columns: 1fr; gap: 2rem; }
-      .process-grid { grid-template-columns: 1fr; }
-      .outcomes-grid { grid-template-columns: repeat(2, 1fr); }
       .icon-styles-grid { grid-template-columns: repeat(2, 1fr); }
-      .cs-foot-nav { flex-direction: column; gap: 1.5rem; padding: 3rem 1.5rem; }
     }
   </style>
 </head>
@@ -504,9 +114,51 @@
           </div>
         </div>
         <div class="cs-prose" style="padding-top: 4.5rem;">
-          <p>I created a unified iconography system with four distinct styles and a comprehensive style guide. The guide documented construction rules, usage guidelines, and strict naming conventions — giving all teams a shared visual vocabulary.</p>
-          <p>The result brought visual consistency across Galp's web and mobile products, eliminated duplicate or conflicting icons, and provided a scalable foundation for future growth.</p>
+          <p>I created a unified iconography system with four distinct styles <em>and</em> a UI component library — buttons, badges, switches, sliders, tabs, and cards — all documented in a comprehensive style guide. The guide covered construction rules, interaction states, usage guidelines, and strict naming conventions, giving every team a shared visual vocabulary.</p>
+          <p>The result brought visual consistency across Galp's web and mobile products, eliminated duplicate or conflicting components, and provided a scalable foundation for future growth.</p>
         </div>
+      </div>
+    </section>
+
+    <!-- PROBLEM & GOALS -->
+    <section class="cs-section reveal">
+      <div class="cs-label">Problem &amp; Goals</div>
+      <h2 class="cs-section-title">A fragmented<br><em>icon landscape</em></h2>
+      <div class="cs-two-col">
+        <div class="cs-prose">
+          <p>Galp's products had grown organically, and each team had solved iconography on its own terms. Icons were pulled from different open libraries, drawn at different sizes, and built on incompatible stroke and grid conventions. The same concept — search, settings, account — could appear three different ways across two screens.</p>
+          <p>This created visible inconsistency for users and hidden cost for teams: duplicated effort, no single source of truth, and no rules for adding new icons without making the problem worse.</p>
+        </div>
+        <div class="cs-prose">
+          <p>The goals were clear:</p>
+          <p><strong>Unify</strong> every icon in use into one coherent visual language.<br>
+          <strong>Document</strong> construction, usage, and naming so any team could contribute correctly.<br>
+          <strong>Scale</strong> the system across web and mobile without re-introducing fragmentation.</p>
+          <p>Success meant teams reaching for one library by default — and trusting it.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESEARCH & DISCOVERY -->
+    <section class="cs-section reveal">
+      <div class="cs-label">Research &amp; Discovery</div>
+      <h2 class="cs-section-title">Auditing what<br><em>already existed</em></h2>
+      <div class="cs-two-col">
+        <div>
+          <h3 style="font-family:var(--font-mono); font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:1.25rem;">Inventory</h3>
+          <div class="cs-prose">
+            <p>I started by collecting every icon in active use across Galp's web and mobile products. Cataloguing them side by side made the scale of the problem concrete — overlapping concepts, conflicting styles, and orphaned icons no longer tied to any live feature.</p>
+          </div>
+        </div>
+        <div>
+          <h3 style="font-family:var(--font-mono); font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:1.25rem;">Patterns &amp; gaps</h3>
+          <div class="cs-prose">
+            <p>Mapping the inventory by function revealed the real coverage needed and exposed gaps where teams had improvised. It also surfaced the recurring contexts — dense UI, marketing, onboarding — that would later justify four distinct icon styles rather than one.</p>
+          </div>
+        </div>
+      </div>
+      <div class="cs-prose" style="margin-top:2.5rem; max-width:none;">
+        <p>The discovery work turned a vague sense of “our icons look messy” into a defensible brief: a known set of concepts to cover, a known set of contexts to serve, and clear evidence for the rules the system would need to enforce.</p>
       </div>
     </section>
 
@@ -542,6 +194,41 @@
       </div>
     </section>
 
+    <!-- COMPONENT LIBRARY -->
+    <section class="cs-section reveal">
+      <div class="cs-label">Component Library</div>
+      <h2 class="cs-section-title">Beyond icons —<br><em>a component system</em></h2>
+      <div class="cs-prose">
+        <p>The system reached past iconography into the interactive building blocks of Galp's products. Each component was documented with its full range of interaction states — default, hover, pressed, focus, and disabled — so behaviour stayed consistent wherever it appeared.</p>
+      </div>
+      <div class="icon-styles-grid">
+        <div class="icon-style-card">
+          <div class="icon-style-name">Buttons</div>
+          <div class="icon-style-desc">Primary and icon-and-text buttons with documented Default, Hover, Pressed, Focus, and Disabled states.</div>
+        </div>
+        <div class="icon-style-card">
+          <div class="icon-style-name">Badges</div>
+          <div class="icon-style-desc">Fill and outline badges plus icon badges, in small, default, and medium sizes for counts and notifications.</div>
+        </div>
+        <div class="icon-style-card">
+          <div class="icon-style-name">Switches &amp; Selectors</div>
+          <div class="icon-style-desc">Toggles, checkboxes, and radios with default, checked, selected, and disabled states.</div>
+        </div>
+        <div class="icon-style-card">
+          <div class="icon-style-name">Sliders</div>
+          <div class="icon-style-desc">Range sliders and interval sliders for filtering and value selection across the products.</div>
+        </div>
+        <div class="icon-style-card">
+          <div class="icon-style-name">Tabs</div>
+          <div class="icon-style-desc">Horizontal and vertical tab patterns with a clear active state for sectioned navigation.</div>
+        </div>
+        <div class="icon-style-card">
+          <div class="icon-style-name">Cards</div>
+          <div class="icon-style-desc">Stat cards, product cards, and feature cards — the containers used to surface accounts, credit, and offers.</div>
+        </div>
+      </div>
+    </section>
+
     <!-- CONSTRUCTION -->
     <section class="cs-section reveal">
       <div class="cs-label">Construction</div>
@@ -554,6 +241,25 @@
         <div class="cs-prose">
           <p>Each icon follows strict alignment rules: centred within the grid, optically balanced, and tested at both 16px and 24px to ensure readability at all target sizes.</p>
           <p>The construction guidelines document covers every rule — from minimum line gaps to angle standardisation — ensuring that any designer contributing to the library produces icons that feel native to the system.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DESIGN DECISIONS -->
+    <section class="cs-section reveal">
+      <div class="cs-label">Design Decisions</div>
+      <h2 class="cs-section-title">Decisions &amp;<br><em>rationale</em></h2>
+      <div class="cs-prose">
+        <p>Every choice in the system was made to reduce ambiguity for the people using it. A few decisions shaped the rest.</p>
+      </div>
+      <div class="cs-two-col" style="margin-top:2.5rem;">
+        <div class="cs-prose">
+          <p><strong>Four styles, not one.</strong> Rather than force every context into a single look, the system offers outline, filled, duotone, and flat — each mapped to a clear use case. This prevented teams from going off-system when one style didn't fit their context.</p>
+          <p><strong>Optical correction over maths.</strong> Shapes are balanced by eye, not by pixel-perfect geometry, so icons read as consistent at the sizes users actually see them.</p>
+        </div>
+        <div class="cs-prose">
+          <p><strong>A fixed grid and stroke.</strong> A 24×24 grid, 2px safe zone, and 1.5px stroke gave contributors hard constraints — the fastest way to keep a growing library coherent.</p>
+          <p><strong>Naming as a feature.</strong> A strict, function-based naming convention made icons discoverable and made the library safe to extend. Good names were treated as part of the design, not an afterthought.</p>
         </div>
       </div>
     </section>
@@ -641,19 +347,19 @@
         </div>
         <div class="outcome-cell">
           <div class="outcome-num">4</div>
-          <div class="outcome-label">Style<br>variants</div>
+          <div class="outcome-label">Icon style<br>variants</div>
+        </div>
+        <div class="outcome-cell">
+          <div class="outcome-num">6+</div>
+          <div class="outcome-label">UI component<br>families</div>
         </div>
         <div class="outcome-cell">
           <div class="outcome-num">1</div>
           <div class="outcome-label">Unified<br>system</div>
         </div>
-        <div class="outcome-cell">
-          <div class="outcome-num">3</div>
-          <div class="outcome-label">Export<br>formats</div>
-        </div>
       </div>
       <div class="cs-prose" style="margin-top:3rem; max-width:none;">
-        <p>The icon system replaced a fragmented collection of inconsistent icons sourced from multiple libraries. By creating a bespoke set tailored to Galp's specific product needs, the system improved visual coherence, reduced design debt, and gave developers a reliable, well-documented resource they could trust.</p>
+        <p>The system replaced a fragmented collection of inconsistent icons and components sourced from multiple libraries. By creating a bespoke set tailored to Galp's specific product needs, it improved visual coherence, reduced design debt, and gave developers a reliable, well-documented resource they could trust.</p>
       </div>
 
       <div style="margin-top:2.5rem;">
@@ -665,6 +371,25 @@
           <span class="tool-chip">Icon Font</span>
           <span class="tool-chip">Style Guide</span>
           <span class="tool-chip">Component Unification</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- MY ROLE -->
+    <section class="cs-section reveal" style="background:var(--mid); border-top:1px solid var(--border);">
+      <div class="cs-label">My Role</div>
+      <div class="cs-two-col">
+        <div>
+          <h2 class="cs-section-title">Role &amp;<br><em>responsibilities</em></h2>
+          <div class="cs-prose">
+            <p>I led the project end to end as the designer responsible for the iconography system and its style guide — from the initial audit through to a documented, developer-ready library.</p>
+          </div>
+        </div>
+        <div class="cs-prose" style="padding-top:4.5rem;">
+          <p><strong>Audit &amp; strategy</strong> — inventoried existing icons, mapped coverage and gaps, and defined the system's structure.</p>
+          <p><strong>Design</strong> — established the grid and construction rules and designed the core set across all four styles.</p>
+          <p><strong>Documentation</strong> — wrote the construction, usage, and naming guidelines that let other teams contribute correctly.</p>
+          <p><strong>Handoff</strong> — delivered SVG exports, a Figma component library, and an icon font, and supported integration into Galp's existing design system.</p>
         </div>
       </div>
     </section>

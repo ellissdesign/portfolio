@@ -7,401 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --black: #0a0a0a;
-      --white: #f5f5f0;
-      --cyan: #00ffb3;
-      --blue: #2440ee;
-      --mid: #1a1a1a;
-      --muted: #9a9a92;
-      --border: rgba(245,245,240,0.12);
-      --font-display: 'Syne', sans-serif;
-      --font-mono: 'Space Mono', monospace;
-    }
-
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--black);
-      color: var(--white);
-      font-family: var(--font-display);
-      overflow-x: hidden;
-      cursor: default;
-    }
-    a { color: inherit; text-decoration: none; }
-    a, button, [role="button"] { cursor: pointer; }
-
-    /* Visible keyboard focus (WCAG 2.4.7) */
-    :focus-visible {
-      outline: 2px solid var(--cyan);
-      outline-offset: 3px;
-    }
-
-    /* Skip link (WCAG 2.4.1) */
-    .skip-link {
-      position: absolute;
-      left: 1rem;
-      top: -3.5rem;
-      z-index: 200;
-      background: var(--cyan);
-      color: var(--black);
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 0.6rem 1rem;
-      transition: top 0.2s;
-    }
-    .skip-link:focus { top: 1rem; }
-
-    /* Respect reduced motion (WCAG 2.3.3) */
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
-      *, *::before, *::after {
-        transition-duration: 0.01ms !important;
-        animation-duration: 0.01ms !important;
-      }
-    }
-
-    /* NAV */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.25rem 3rem;
-      border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(20px);
-      background: rgba(10,10,10,0.85);
-    }
-    .nav-logo {
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      letter-spacing: 0.2em;
-      color: var(--cyan);
-      text-transform: uppercase;
-    }
-    .nav-back {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--muted);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: color 0.2s;
-    }
-    .nav-back:hover { color: var(--cyan); }
-    .nav-back::before { content: '←'; }
-
-    /* HERO */
-    .cs-hero {
-      min-height: 60vh;
-      padding: 10rem 3rem 6rem;
-      position: relative;
-      overflow: hidden;
-      border-bottom: 1px solid var(--border);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: end;
-    }
-    .cs-hero-bg {
-      position: absolute;
-      inset: 0;
-      background:
-        repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(245,245,240,0.02) 40px, rgba(245,245,240,0.02) 41px),
-        repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(245,245,240,0.02) 40px, rgba(245,245,240,0.02) 41px);
-      pointer-events: none;
-    }
-    .cs-hero-accent {
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--cyan) 0%, transparent 60%);
-    }
-    .cs-label {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--cyan);
-      margin-bottom: 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    .cs-label::before {
-      content: '';
-      display: inline-block;
-      width: 1.5rem;
-      height: 1px;
-      background: var(--cyan);
-    }
-    .cs-title {
-      font-size: clamp(2.5rem, 5vw, 5rem);
-      font-weight: 800;
-      line-height: 0.95;
-      letter-spacing: -0.03em;
-      margin-bottom: 2rem;
-    }
-    .cs-title span {
-      display: block;
-      color: rgba(245,245,240,0.10);
-      -webkit-text-stroke: 1px var(--white);
-    }
-    .cs-hero-right {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-      padding-bottom: 0.5rem;
-    }
-    .cs-meta-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-    }
-    .cs-meta-cell {
-      background: var(--black);
-      padding: 1.25rem;
-    }
-    .cs-meta-key {
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.4rem;
-    }
-    .cs-meta-val {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--white);
-    }
-    .cs-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-    .cs-tag {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      padding: 0.3rem 0.7rem;
-      background: rgba(0,255,179,0.07);
-      border: 1px solid rgba(0,255,179,0.2);
-      color: var(--cyan);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    /* BODY SECTIONS */
-    .cs-body {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .cs-section {
-      padding: 6rem 3rem;
-      border-bottom: 1px solid var(--border);
-    }
-    .cs-section-label {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--cyan);
-      margin-bottom: 2.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    .cs-section-label::before {
-      content: '';
-      display: inline-block;
-      width: 1.5rem;
-      height: 1px;
-      background: var(--cyan);
-    }
-    .cs-section-title {
-      font-size: clamp(1.8rem, 3vw, 2.5rem);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      line-height: 1;
-      margin-bottom: 2.5rem;
-    }
-    .cs-section-title em {
-      font-style: normal;
-      color: rgba(245,245,240,0.10);
-      -webkit-text-stroke: 1px var(--white);
-    }
-    .cs-prose {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.95rem;
-      line-height: 1.7;
-      color: rgba(245,245,240,0.82);
-      max-width: 66ch;
-      letter-spacing: 0.01em;
-    }
-    .cs-prose p + p { margin-top: 1.5em; }
-    .cs-two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: start;
-    }
-
-    /* PROCESS STEPS */
-    .process-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      margin-top: 3rem;
-    }
-    .process-step {
-      background: var(--black);
-      padding: 2.5rem 2rem;
-      position: relative;
-    }
-    .process-num {
-      font-family: var(--font-display);
-      font-size: 4rem;
-      font-weight: 800;
-      color: transparent;
-      -webkit-text-stroke: 1px rgba(245,245,240,0.06);
-      line-height: 1;
-      margin-bottom: 1rem;
-    }
-    .process-step-title {
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 0.75rem;
-    }
-    .process-step-desc {
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      line-height: 1.75;
-      color: var(--muted);
-    }
-    .process-accent {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, var(--cyan) 0%, transparent 60%);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.4s ease;
-    }
-    .process-step:hover .process-accent { transform: scaleX(1); }
-
-    /* OUTCOMES */
-    .outcomes-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      margin-top: 3rem;
-    }
-    .outcome-cell {
-      background: var(--black);
-      padding: 2rem;
-      text-align: center;
-    }
-    .outcome-num {
-      font-family: var(--font-display);
-      font-size: 2.5rem;
-      font-weight: 800;
-      color: var(--cyan);
-      line-height: 1;
-      margin-bottom: 0.5rem;
-    }
-    .outcome-label {
-      font-family: var(--font-mono);
-      font-size: 0.62rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    /* TOOLS */
-    .tools-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      margin-top: 2rem;
-    }
-    .tool-chip {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 0.5rem 1rem;
-      border: 1px solid var(--border);
-      color: var(--muted);
-    }
-
-    /* FOOTER NAV */
-    .cs-foot-nav {
-      padding: 4rem 3rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .cs-foot-back {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: color 0.2s;
-    }
-    .cs-foot-back:hover { color: var(--cyan); }
-    .cs-foot-back::before { content: '← '; }
-    footer {
-      padding: 2rem 3rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-top: 1px solid var(--border);
-    }
-    .footer-copy {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      color: var(--muted);
-      letter-spacing: 0.1em;
-    }
-
-    /* REVEAL */
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    @media (max-width: 900px) {
-      nav { padding: 1rem 1.5rem; }
-      .cs-hero { grid-template-columns: 1fr; padding: 8rem 1.5rem 4rem; }
-      .cs-section { padding: 4rem 1.5rem; }
-      .cs-two-col { grid-template-columns: 1fr; gap: 2rem; }
-      .process-grid { grid-template-columns: 1fr; }
-      .outcomes-grid { grid-template-columns: repeat(2, 1fr); }
-      .cs-foot-nav { flex-direction: column; gap: 1.5rem; padding: 3rem 1.5rem; }
-    }
-  </style>
+  <link rel="stylesheet" href="case-study.css">
 </head>
 <body>
   <a href="#main" class="skip-link">Skip to content</a>
@@ -469,6 +75,68 @@
         <div class="cs-prose" style="padding-top: 4.5rem;">
           <p>I designed a clean, structured web portal that simplified task workflows and made information hierarchy immediately apparent. The interface prioritises clarity over density — every element earns its place on screen.</p>
           <p>Using OutSystems patterns as the component foundation ensured consistency with existing internal tools while introducing a significantly improved user experience.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROBLEM & GOALS -->
+    <section class="cs-section reveal">
+      <div class="cs-label">Problem &amp; Goals</div>
+      <h2 class="cs-section-title">A tool that<br><em>got in the way</em></h2>
+      <div class="cs-two-col">
+        <div class="cs-prose">
+          <p>Marte's existing portal had grown complex and hard to navigate. Workers faced information overload, unclear hierarchy, and too many steps to complete everyday actions. The tool meant to help people manage their work was itself a source of friction — slowing daily operations and adding to the learning curve for new staff.</p>
+          <p>The redesign had to make the portal feel obvious: something a worker could pick up and understand immediately, without training.</p>
+        </div>
+        <div class="cs-prose">
+          <p>The goals were focused:</p>
+          <p><strong>Clarify</strong> the interface so the important information is always apparent.<br>
+          <strong>Simplify</strong> task workflows and reduce the steps to common actions.<br>
+          <strong>Modernise</strong> the look and feel without breaking consistency with existing internal tools.<br>
+          <strong>Improve</strong> productivity by lowering cognitive load.</p>
+          <p>Built on OutSystems patterns to stay consistent and efficient to deliver.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESEARCH & DISCOVERY -->
+    <section class="cs-section reveal">
+      <div class="cs-label">Research &amp; Discovery</div>
+      <h2 class="cs-section-title">Watching the<br><em>real workflow</em></h2>
+      <div class="cs-two-col">
+        <div>
+          <h3 style="font-family:var(--font-mono); font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:1.25rem;">Worker interviews</h3>
+          <div class="cs-prose">
+            <p>I interviewed the people who used the portal every day and mapped their existing task workflows end to end. Seeing the work as they experienced it surfaced exactly where the tool fought them rather than helped them.</p>
+          </div>
+        </div>
+        <div>
+          <h3 style="font-family:var(--font-mono); font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:1.25rem;">Pain points</h3>
+          <div class="cs-prose">
+            <p>Three problems dominated: information overload, unclear hierarchy, and too many steps to complete common actions. Naming them precisely turned a vague “it's confusing” into a concrete list the design could answer to.</p>
+          </div>
+        </div>
+      </div>
+      <div class="cs-prose" style="margin-top:2.5rem; max-width:none;">
+        <p>Discovery reframed the brief around clarity. Every later decision — the restructured hierarchy, the progressive disclosure, the generous whitespace — traces directly back to a pain point observed in this phase.</p>
+      </div>
+    </section>
+
+    <!-- DESIGN DECISIONS -->
+    <section class="cs-section reveal">
+      <div class="cs-label">Design Decisions</div>
+      <h2 class="cs-section-title">Decisions &amp;<br><em>rationale</em></h2>
+      <div class="cs-prose">
+        <p>Each decision served one aim: make the right information and the next action obvious. A few choices shaped the rest.</p>
+      </div>
+      <div class="cs-two-col" style="margin-top:2.5rem;">
+        <div class="cs-prose">
+          <p><strong>Clarity over density.</strong> Every element has to earn its place on screen. Generous whitespace and strong typography keep each view scannable instead of overwhelming.</p>
+          <p><strong>A clear mental model.</strong> The structure was rebuilt around tasks, projects, and analytics, with progressive disclosure so detail appears only when it's needed.</p>
+        </div>
+        <div class="cs-prose">
+          <p><strong>Reusable components.</strong> Task cards, status filters, priority badges, and data tables were designed as a consistent set — predictable for users and efficient for developers.</p>
+          <p><strong>OutSystems as the foundation.</strong> Building on existing component patterns kept the portal consistent with internal tools and fast to ship.</p>
         </div>
       </div>
     </section>
@@ -580,6 +248,25 @@
           <span class="tool-chip">Information Architecture</span>
           <span class="tool-chip">Data Visualisation</span>
           <span class="tool-chip">Prototyping</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- MY ROLE -->
+    <section class="cs-section reveal" style="background:var(--mid); border-top:1px solid var(--border);">
+      <div class="cs-label">My Role</div>
+      <div class="cs-two-col">
+        <div>
+          <h2 class="cs-section-title">Role &amp;<br><em>responsibilities</em></h2>
+          <div class="cs-prose">
+            <p>I worked as the designer on the Marte portal, responsible for the experience end to end — from research with the people who used the tool through to a documented handoff built on OutSystems patterns.</p>
+          </div>
+        </div>
+        <div class="cs-prose" style="padding-top:4.5rem;">
+          <p><strong>Research</strong> — interviewed workers and mapped existing workflows to pinpoint the real pain points.</p>
+          <p><strong>Architecture</strong> — restructured the task hierarchy and navigation around a clear mental model.</p>
+          <p><strong>Design</strong> — produced the dashboard, task views, and a reusable component set.</p>
+          <p><strong>Prototyping &amp; delivery</strong> — built interactive prototypes for the key flows and delivered specs aligned to OutSystems components, including data density, empty states, and responsive behaviour.</p>
         </div>
       </div>
     </section>
