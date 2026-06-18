@@ -213,9 +213,12 @@
   .hero-frame-bg {
     position: absolute;
     inset: 0;
+    z-index: 0;
     background: url('profile.jpg') center / cover no-repeat;
   }
   .hero-stats {
+    position: relative;
+    z-index: 1;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1px;
@@ -276,7 +279,6 @@
     font-weight: 800;
     line-height: 1;
     letter-spacing: -0.02em;
-    margin-bottom: 4rem;
   }
 
   /* EXPERTISE */
