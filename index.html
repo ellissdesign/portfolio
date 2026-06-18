@@ -117,24 +117,6 @@
     justify-content: center;
     padding: 4rem 3rem 4rem 3rem;
   }
-  .hero-tag {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--cyan);
-    margin-bottom: 2rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  .hero-tag::before {
-    content: '';
-    display: block;
-    width: 2rem;
-    height: 1px;
-    background: var(--cyan);
-  }
   .hero-name {
     font-family: var(--font-display);
     font-size: clamp(3.5rem, 7vw, 7rem);
@@ -155,7 +137,7 @@
     color: var(--muted);
     text-transform: uppercase;
     margin-bottom: 2.5rem;
-    border-left: 2px solid var(--blue);
+    border-left: 2px solid var(--cyan);
     padding-left: 1rem;
   }
   .hero-bio {
@@ -231,21 +213,7 @@
   .hero-frame-bg {
     position: absolute;
     inset: 0;
-    background:
-      repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 40px,
-        rgba(245,245,240,0.02) 40px,
-        rgba(245,245,240,0.02) 41px
-      ),
-      repeating-linear-gradient(
-        90deg,
-        transparent,
-        transparent 40px,
-        rgba(245,245,240,0.02) 40px,
-        rgba(245,245,240,0.02) 41px
-      );
+    background: url('profile.jpg') center / cover no-repeat;
   }
   .hero-stats {
     display: grid;
@@ -301,24 +269,6 @@
   section {
     padding: 7rem 3rem;
     position: relative;
-  }
-  .section-label {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--cyan);
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
-  .section-label::before {
-    content: '';
-    display: inline-block;
-    width: 1.5rem;
-    height: 1px;
-    background: var(--cyan);
   }
   .section-title {
     font-family: var(--font-display);
@@ -884,7 +834,6 @@
 <!-- HERO -->
 <section class="hero" style="padding: 0; padding-top: 4.5rem; border-bottom: 1px solid var(--border);">
   <div class="hero-left">
-    <div class="hero-tag">Available for new opportunities</div>
     <h1 class="hero-name">
       Ellis
       <span>Victoria</span>
@@ -966,7 +915,6 @@
 
 <!-- EXPERTISE -->
 <section class="expertise" id="expertise">
-  <div class="section-label">Core Expertise</div>
   <h2 class="section-title">What I Do</h2>
   <div class="expertise-grid reveal">
     <div class="expertise-card">
@@ -1041,7 +989,6 @@
 <!-- WORK -->
 <section id="work" style="padding-left:0; padding-right:0; padding-bottom:0;">
   <div style="padding: 0 3rem 4rem;">
-    <div class="section-label">Selected Work</div>
     <h2 class="section-title">Projects</h2>
   </div>
   <div class="work-grid reveal">
@@ -1135,7 +1082,6 @@
 
 <!-- AI CAPABILITIES -->
 <section class="ai-section" id="ai">
-  <div class="section-label">New Capabilities</div>
   <h2 class="section-title">AI &amp; Emerging<br>Design Practice</h2>
   <div class="ai-grid reveal">
     <div class="ai-card">
@@ -1175,7 +1121,6 @@
 
 <!-- EXPERIENCE -->
 <section class="experience" id="experience">
-  <div class="section-label">Career</div>
   <h2 class="section-title">Experience</h2>
   <div class="timeline reveal">
 
@@ -1228,7 +1173,6 @@
 
 <!-- SKILLS -->
 <section id="skills" style="border-top: 1px solid var(--border);">
-  <div class="section-label">Toolkit</div>
   <h2 class="section-title">Skills &amp; Tools</h2>
   <div class="skills-grid reveal">
     <div>
